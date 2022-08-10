@@ -29,11 +29,6 @@
         "eject": "react-scripts eject",
         "pretty": "prettier --write src"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run pretty"
-        }
-    },
     "eslintConfig": {
         "extends": [
             "react-app"
