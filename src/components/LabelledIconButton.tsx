@@ -1,8 +1,8 @@
-import React from 'react';
-
 import classes from './LabelledIconButton.module.css';
 import Button, { ButtonProps } from '../atoms/Button';
 import clsx from 'clsx';
+
+import type React from 'react';
 
 interface LabelledIconButtonProps extends ButtonProps {
   label: string;

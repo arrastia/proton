@@ -1,7 +1,8 @@
-import React from 'react';
 import clsx from 'clsx';
 
 import classes from './Header.module.css';
+
+import type React from 'react';
 
 export type HeaderProps = React.ComponentPropsWithoutRef<'header'>;
 

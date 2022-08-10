@@ -1,7 +1,8 @@
-import React from 'react';
 import clsx from 'clsx';
 
 import classes from './Icon.module.css';
+
+import type React from 'react';
 
 export interface IconProps extends React.ComponentPropsWithoutRef<'i'> {
   size?: 'small' | 'medium' | 'large';

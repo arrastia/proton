@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import React from 'react';
 
 import classes from './Label.module.css';
+
+import type React from 'react';
 
 interface LabelledProps extends React.ComponentPropsWithoutRef<'div'> {
   label: string;

@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import uniqid from 'uniqid';
 
-import AppHeader from './AppHeader';
-import Passwords from './Passwords';
-import NoPasswordSelected from './NoPasswordSelected';
-import NoPasswords from './NoPasswords';
-import PasswordView from './PasswordView';
-import PasswordEdit from './PasswordEdit';
-
-import { Password } from '../models';
 import classes from './PasswordMainContainer.module.css';
+
+import AppHeader from './AppHeader';
+import NoPasswords from './NoPasswords';
+import NoPasswordSelected from './NoPasswordSelected';
+import PasswordEdit from './PasswordEdit';
+import Passwords from './Passwords';
+import PasswordView from './PasswordView';
+
+import type { Password } from '../models';
 
 function createNewPassword() {
   const id = uniqid();
 
-  return {
-    id,
-    value: ''
-  } as Password;
+  return { id, value: '' } as Password;
 }
 
 interface Props {
@@ -72,16 +70,16 @@ const PasswordMain = ({ decryptedPasswords, onLogout, onPasswordCreated, onPassw
     <div className={classes.container}>
       <div className={classes.headerArea}>
         <AppHeader
-          editing={editing}
           amountOfVulnerablePasswords={amountOfVulnerablePasswords}
-          onNewPassword={handleCreatePassword}
+          editing={editing}
           onLogout={onLogout}
+          onNewPassword={handleCreatePassword}
         />
       </div>
 
       <div className={classes.passwordsArea}>
         {Object.values(decryptedPasswords).length > 0 ? (
-          <Passwords passwords={decryptedPasswords} editing={editing} onSelectPassword={handleSelectPassword} />
+          <Passwords editing={editing} onSelectPassword={handleSelectPassword} passwords={decryptedPasswords} />
         ) : (
           <NoPasswords />
         )}
@@ -92,13 +90,13 @@ const PasswordMain = ({ decryptedPasswords, onLogout, onPasswordCreated, onPassw
           editing ? (
             <PasswordEdit
               key={selectedPasswordId}
-              password={decryptedPasswords[selectedPasswordId]}
-              onSave={handleSave}
               onCancel={handleCancel}
               onDelete={() => handleDelete(selectedPasswordId)}
+              onSave={handleSave}
+              password={decryptedPasswords[selectedPasswordId]}
             />
           ) : (
-            <PasswordView key={selectedPasswordId} password={decryptedPasswords[selectedPasswordId]} onEdit={handlePasswordEditIntent} />
+            <PasswordView key={selectedPasswordId} onEdit={handlePasswordEditIntent} password={decryptedPasswords[selectedPasswordId]} />
           )
         ) : (
           <NoPasswordSelected />

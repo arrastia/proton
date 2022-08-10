@@ -1,7 +1,8 @@
-import React from 'react';
 import clsx from 'clsx';
 
 import classes from './ListItem.module.css';
+
+import type React from 'react';
 
 interface Props extends React.ComponentPropsWithoutRef<'li'> {
   clickable?: boolean;

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Password } from './models';
 import * as storage from './storage';
 import { encrypt, decrypt, getKey, base64StringToUint8Array } from './crypto';
 import { wait } from './helpers';
 import { CRYPTO_KEY_STORAGE_KEY, PASSWORDS_STORAGE_KEY } from './constants';
 import PasswordLockedContainer from './components/PasswordLockedContainer';
 import PasswordMainContainer from './components/PasswordMainContainer';
+
+import type { Password } from './models';
 
 function duplicateUrlsAmongPasswords(passwords: { [id: string]: Password }) {
   return null;

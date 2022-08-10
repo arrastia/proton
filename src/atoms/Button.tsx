@@ -1,7 +1,8 @@
-import React from 'react';
 import clsx from 'clsx';
 
 import classes from './Button.module.css';
+
+import type React from 'react';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   color?: 'blue' | 'green' | 'light';

@@ -1,10 +1,11 @@
-import React from 'react';
 import clsx from 'clsx';
 
-import { Password } from '../models';
-import List from '../atoms/List';
-import PasswordListItem from './PasswordListItem';
 import classes from './Passwords.module.css';
+
+import List from 'atoms/List';
+import PasswordListItem from './PasswordListItem';
+
+import type { Password } from '../models';
 
 interface Props {
   editing: boolean;

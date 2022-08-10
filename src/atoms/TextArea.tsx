@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import React from 'react';
 
 import classes from './Input.module.css';
+
+import type React from 'react';
 
 interface Props extends React.ComponentProps<'textarea'> {}
 
