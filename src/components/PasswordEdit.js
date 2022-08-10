@@ -12,130 +12,116 @@ import clsx from 'clsx';
 import TextArea from '../atoms/TextArea';
 
 const UrlList = React.memo(({ urls, onDelete }) => (
-    <List className={classes.urlList}>
-        {urls?.map((urlEntry, index) => (
-            <ListItem dense className={classes.urlListItem}>
-                <input autoFocus value={urlEntry} />
-                <Icon onClick={() => onDelete(index)} size="small" className="fas fa-times" />
-            </ListItem>
-        ))}
-        {urls?.length === 0 && (
-            <ListItem dense className={clsx(classes.urlListItem, classes.urlListItemEmpty)}>
-                No urls added
-            </ListItem>
-        )}
-    </List>
+  <List className={classes.urlList}>
+    {urls?.map((urlEntry, index) => (
+      <ListItem dense className={classes.urlListItem}>
+        <input autoFocus value={urlEntry} />
+        <Icon onClick={() => onDelete(index)} size="small" className="fas fa-times" />
+      </ListItem>
+    ))}
+    {urls?.length === 0 && (
+      <ListItem dense className={clsx(classes.urlListItem, classes.urlListItemEmpty)}>
+        No urls added
+      </ListItem>
+    )}
+  </List>
 ));
 
 function PasswordEdit({ password, onSave, onDelete, onCancel }) {
-    const [values, setValues] = useState(password);
+  const [values, setValues] = useState(password);
 
-    const [urlInput, setUrlInput] = useState('');
+  const [urlInput, setUrlInput] = useState('');
 
-    function change(partial) {
-        setValues((values) => ({
-            ...values,
-            ...partial,
-        }));
-    }
+  function change(partial) {
+    setValues(values => ({
+      ...values,
+      ...partial
+    }));
+  }
 
-    function handleChange(e) {
-        change({ [e.target.name]: e.target.value });
-    }
+  function handleChange(e) {
+    change({ [e.target.name]: e.target.value });
+  }
 
-    function handleSaveClick() {
-        onSave({
-            ...password,
-            ...values,
-        });
-    }
+  function handleSaveClick() {
+    onSave({
+      ...password,
+      ...values
+    });
+  }
 
-    function handleDeleteClick() {
-        onDelete();
-    }
+  function handleDeleteClick() {
+    onDelete();
+  }
 
-    function handleCancelClick() {
-        onCancel();
-    }
+  function handleCancelClick() {
+    onCancel();
+  }
 
-    function handleUrlAdd() {
-        const urls = values.url || [];
+  function handleUrlAdd() {
+    const urls = values.url || [];
 
-        urls.unshift(urlInput);
+    urls.unshift(urlInput);
 
-        change({ url: urls });
+    change({ url: urls });
 
-        setUrlInput('');
-    }
+    setUrlInput('');
+  }
 
-    const handleUrlDelete = useCallback(
-        (index) => () => {
-            const urls = values.url || [];
+  const handleUrlDelete = useCallback(
+    index => () => {
+      const urls = values.url || [];
 
-            urls.splice(index, 1);
+      urls.splice(index, 1);
 
-            change({ url: urls });
-        },
-        []
-    );
+      change({ url: urls });
+    },
+    []
+  );
 
-    return (
-        <div className={classes.container}>
-            <h2 className={classes.title}>
-                <input
-                    autoFocus
-                    className={classes.titleInput}
-                    name="name"
-                    value={values.name}
-                    onChange={handleChange}
-                />
-            </h2>
-            <div className={classes.content}>
-                <Labelled label="description">
-                    <TextArea name="description" value={values.description} onChange={handleChange} />
-                </Labelled>
+  return (
+    <div className={classes.container}>
+      <h2 className={classes.title}>
+        <input autoFocus className={classes.titleInput} name="name" value={values.name} onChange={handleChange} />
+      </h2>
+      <div className={classes.content}>
+        <Labelled label="description">
+          <TextArea name="description" value={values.description} onChange={handleChange} />
+        </Labelled>
 
-                <Labelled label="value">
-                    <Input name="value" value={values.value} onChange={handleChange} />
-                </Labelled>
+        <Labelled label="value">
+          <Input name="value" value={values.value} onChange={handleChange} />
+        </Labelled>
 
-                <Labelled label="url">
-                    <div>
-                        <Input
-                            value={urlInput}
-                            onChange={(e) => setUrlInput(e.target.value)}
-                            style={{ marginRight: 4 }}
-                        />
+        <Labelled label="url">
+          <div>
+            <Input value={urlInput} onChange={e => setUrlInput(e.target.value)} style={{ marginRight: 4 }} />
 
-                        <Button onClick={handleUrlAdd}>Add</Button>
-                    </div>
+            <Button onClick={handleUrlAdd}>Add</Button>
+          </div>
 
-                    <UrlList urls={values.url} onDelete={handleUrlDelete} />
-                </Labelled>
-            </div>
-            <div className={classes.controls}>
-                <LabelledIconButton
-                    label="Cancel"
-                    className={classes.cancel}
-                    onClick={handleCancelClick}
-                    icon={<Icon size="small" className="fas fa-times" />}
-                />
+          <UrlList urls={values.url} onDelete={handleUrlDelete} />
+        </Labelled>
+      </div>
+      <div className={classes.controls}>
+        <LabelledIconButton
+          label="Cancel"
+          className={classes.cancel}
+          onClick={handleCancelClick}
+          icon={<Icon size="small" className="fas fa-times" />}
+        />
 
-                <LabelledIconButton
-                    label="Save"
-                    onClick={handleSaveClick}
-                    icon={<Icon size="small" className="fas fa-save" />}
-                />
+        <LabelledIconButton label="Save" onClick={handleSaveClick} icon={<Icon size="small" className="fas fa-save" />} />
 
-                <LabelledIconButton
-                    label="Delete"
-                    className={classes.delete}
-                    onClick={handleDeleteClick}
-                    icon={<Icon size="small" className="fas fa-trash" />}
-                />
-            </div>
-        </div>
-    );
+        <LabelledIconButton
+          label="Delete"
+          className={classes.delete}
+          onClick={handleDeleteClick}
+          icon={<Icon size="small" className="fas fa-trash" />}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default PasswordEdit;

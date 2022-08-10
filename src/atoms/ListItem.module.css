@@ -1,30 +1,30 @@
 .root {
-    padding: 16px 32px;
+  padding: 16px 32px;
 }
 
 .root:not(:last-child) {
-    border-bottom: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
 }
 
 .root:focus {
-    outline: none;
-    background: var(--focus);
+  outline: none;
+  background: var(--focus);
 }
 
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .clickable:hover {
-    background: var(--hover);
+  background: var(--hover);
 }
 
 .selected,
 .selected:hover,
 .selected:focus {
-    background: var(--active);
+  background: var(--active);
 }
 
 .dense {
-    padding: 8px 16px;
+  padding: 8px 16px;
 }

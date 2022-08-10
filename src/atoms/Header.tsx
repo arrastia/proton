@@ -6,9 +6,9 @@ import classes from './Header.module.css';
 export type HeaderProps = React.ComponentPropsWithoutRef<'header'>;
 
 function Header({ className, ...rest }: HeaderProps) {
-    const rootClassName = clsx(classes.root, className);
+  const rootClassName = clsx(classes.root, className);
 
-    return <header className={rootClassName} {...rest} />;
+  return <header className={rootClassName} {...rest} />;
 }
 
 export default Header;

@@ -9,53 +9,47 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 
 interface Props {
-    onSuccess: (password: CryptoKey) => void;
+  onSuccess: (password: CryptoKey) => void;
 }
 
 const PasswordLockedContainer = ({ onSuccess }: Props) => {
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-        if (loading) {
-            return;
-        }
+    if (loading) {
+      return;
+    }
 
-        const validate = async () => {
-            const derivation = await getDerivation(password);
-            const key = await getKey(derivation);
-            await wait(500);
-            await decrypt(key, encryptedValidation);
-            onSuccess(key);
-            storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
-        };
-
-        setLoading(true);
-        validate().catch(() => setLoading(false));
+    const validate = async () => {
+      const derivation = await getDerivation(password);
+      const key = await getKey(derivation);
+      await wait(500);
+      await decrypt(key, encryptedValidation);
+      onSuccess(key);
+      storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
+    setLoading(true);
+    validate().catch(() => setLoading(false));
+  };
 
-    return (
-        <div className={classes.container}>
-            <form className={classes.form} onSubmit={handleSubmit}>
-                <h1>Enter your master password</h1>
-                <label htmlFor="password-input">Password</label>
-                <Input
-                    id="password-input"
-                    value={password}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder="***********"
-                />
-                <Button disabled={loading}>Submit</Button>
-            </form>
-        </div>
-    );
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  return (
+    <div className={classes.container}>
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <h1>Enter your master password</h1>
+        <label htmlFor="password-input">Password</label>
+        <Input id="password-input" value={password} onChange={handleChange} type="password" placeholder="***********" />
+        <Button disabled={loading}>Submit</Button>
+      </form>
+    </div>
+  );
 };
 
 export default PasswordLockedContainer;

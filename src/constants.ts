@@ -1,7 +1,7 @@
 // Password is 123456789
 export const encryptedValidation = {
-    iv: '+bI1EmRf4ItimfEErTY7Cg==',
-    cipher: 'bWU1+TwUugQ1SeS98Zprxy10',
+  iv: '+bI1EmRf4ItimfEErTY7Cg==',
+  cipher: 'bWU1+TwUugQ1SeS98Zprxy10'
 };
 
 export const PASSWORDS_STORAGE_KEY = 'passwords';

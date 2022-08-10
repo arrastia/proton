@@ -1,9 +1,9 @@
 .root {
-    display: block;
+  display: block;
 }
 
 .label {
-    display: block;
-    font-size: 0.8em;
-    margin-bottom: 4px;
+  display: block;
+  font-size: 0.8em;
+  margin-bottom: 4px;
 }

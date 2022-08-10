@@ -9,126 +9,126 @@ import PasswordLockedContainer from './components/PasswordLockedContainer';
 import PasswordMainContainer from './components/PasswordMainContainer';
 
 function duplicateUrlsAmongPasswords(passwords: { [id: string]: Password }) {
-    return null;
+  return null;
 }
 
 function App() {
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-    const [key, setKey] = useState<CryptoKey | null>(null);
+  const [key, setKey] = useState<CryptoKey | null>(null);
 
-    const [decryptedPasswords, setDecryptedPasswords] = useState<{ [id: string]: Password }>({});
+  const [decryptedPasswords, setDecryptedPasswords] = useState<{ [id: string]: Password }>({});
 
-    async function hydratePasswords(newKey: CryptoKey) {
-        setKey(newKey);
-        await wait(500);
-        const encryptedPasswords = JSON.parse(storage.getItem(PASSWORDS_STORAGE_KEY));
-        if (!encryptedPasswords) {
-            return;
-        }
-        const decryptedPasswords = JSON.parse(await decrypt(newKey, encryptedPasswords));
-        setDecryptedPasswords(decryptedPasswords);
+  async function hydratePasswords(newKey: CryptoKey) {
+    setKey(newKey);
+    await wait(500);
+    const encryptedPasswords = JSON.parse(storage.getItem(PASSWORDS_STORAGE_KEY));
+    if (!encryptedPasswords) {
+      return;
+    }
+    const decryptedPasswords = JSON.parse(await decrypt(newKey, encryptedPasswords));
+    setDecryptedPasswords(decryptedPasswords);
+  }
+
+  function handleSuccess(newKey: CryptoKey) {
+    const run = async () => {
+      try {
+        await hydratePasswords(newKey);
+      } catch (e) {
+        return;
+      }
+    };
+
+    setLoading(true);
+    run().finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    const rawCryptoKey = storage.getItem<string>(CRYPTO_KEY_STORAGE_KEY);
+
+    if (!rawCryptoKey) {
+      setLoading(false);
+      return;
     }
 
-    function handleSuccess(newKey: CryptoKey) {
-        const run = async () => {
-            try {
-                await hydratePasswords(newKey);
-            } catch (e) {
-                return;
-            }
-        };
+    getKey(base64StringToUint8Array(rawCryptoKey)).then(storedKey => {
+      setKey(storedKey);
+      handleSuccess(storedKey);
+      setLoading(false);
+    });
+  }, []);
 
-        setLoading(true);
-        run().finally(() => setLoading(false));
+  useEffect(() => {
+    async function sync() {
+      if (!key) {
+        return;
+      }
+      const data = JSON.stringify(decryptedPasswords);
+      const encryptedPasswords = await encrypt(key, data);
+      storage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(encryptedPasswords));
     }
 
-    useEffect(() => {
-        const rawCryptoKey = storage.getItem<string>(CRYPTO_KEY_STORAGE_KEY);
+    sync();
+  }, []);
 
-        if (!rawCryptoKey) {
-            setLoading(false);
-            return;
-        }
+  function handleLogout() {
+    storage.removeItem(CRYPTO_KEY_STORAGE_KEY);
+    setKey(null);
+  }
 
-        getKey(base64StringToUint8Array(rawCryptoKey)).then((storedKey) => {
-            setKey(storedKey);
-            handleSuccess(storedKey);
-            setLoading(false);
-        });
-    }, []);
+  function handlePasswordCreated(password: Password) {
+    setDecryptedPasswords(passwords => ({
+      ...passwords,
+      [password.id]: password
+    }));
+  }
 
-    useEffect(() => {
-        async function sync() {
-            if (!key) {
-                return;
-            }
-            const data = JSON.stringify(decryptedPasswords);
-            const encryptedPasswords = await encrypt(key, data);
-            storage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(encryptedPasswords));
-        }
+  function handlePasswordEdited(password: Password) {
+    const nextPasswords = {
+      ...decryptedPasswords,
+      [password.id]: {
+        ...password,
+        lastModifiedAt: Date.now()
+      }
+    };
 
-        sync();
-    }, []);
+    const duplicateUrls = duplicateUrlsAmongPasswords(decryptedPasswords);
 
-    function handleLogout() {
-        storage.removeItem(CRYPTO_KEY_STORAGE_KEY);
-        setKey(null);
+    if (duplicateUrls) {
+      /*
+       * if there are duplicate urls among the passwords alert a message such as
+       * 'Duplicate url "https://foobar.com" found for passwords "foo", "bar", "baz"'
+       */
     }
 
-    function handlePasswordCreated(password: Password) {
-        setDecryptedPasswords((passwords) => ({
-            ...passwords,
-            [password.id]: password,
-        }));
-    }
+    setDecryptedPasswords(nextPasswords);
+  }
 
-    function handlePasswordEdited(password: Password) {
-        const nextPasswords = {
-            ...decryptedPasswords,
-            [password.id]: {
-                ...password,
-                lastModifiedAt: Date.now(),
-            },
-        };
+  function handlePasswordDeleted(id: string) {
+    setDecryptedPasswords(passwords => {
+      const { [id]: deleted, ...remaining } = passwords;
 
-        const duplicateUrls = duplicateUrlsAmongPasswords(decryptedPasswords);
+      return remaining;
+    });
+  }
 
-        if (duplicateUrls) {
-            /*
-             * if there are duplicate urls among the passwords alert a message such as
-             * 'Duplicate url "https://foobar.com" found for passwords "foo", "bar", "baz"'
-             */
-        }
+  if (loading) {
+    return <>Loading</>;
+  }
 
-        setDecryptedPasswords(nextPasswords);
-    }
+  if (!key) {
+    return <PasswordLockedContainer onSuccess={handleSuccess} />;
+  }
 
-    function handlePasswordDeleted(id: string) {
-        setDecryptedPasswords((passwords) => {
-            const { [id]: deleted, ...remaining } = passwords;
-
-            return remaining;
-        });
-    }
-
-    if (loading) {
-        return <>Loading</>;
-    }
-
-    if (!key) {
-        return <PasswordLockedContainer onSuccess={handleSuccess} />;
-    }
-
-    return (
-        <PasswordMainContainer
-            decryptedPasswords={decryptedPasswords}
-            onLogout={handleLogout}
-            onPasswordCreated={handlePasswordCreated}
-            onPasswordEdited={handlePasswordEdited}
-            onPasswordDeleted={handlePasswordDeleted}
-        />
-    );
+  return (
+    <PasswordMainContainer
+      decryptedPasswords={decryptedPasswords}
+      onLogout={handleLogout}
+      onPasswordCreated={handlePasswordCreated}
+      onPasswordEdited={handlePasswordEdited}
+      onPasswordDeleted={handlePasswordDeleted}
+    />
+  );
 }
 
 export default App;
