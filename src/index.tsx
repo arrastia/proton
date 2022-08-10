@@ -1,7 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
 import './index.css';
 import './colors.css';
+
 import App from './App';
 import seed from './seed.json';
 
@@ -11,9 +13,8 @@ if (passwords === null) {
     window.localStorage.setItem('passwords', JSON.stringify(seed));
 }
 
-ReactDOM.render(
-    <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+    <StrictMode>
         <App />
-    </React.StrictMode>,
-    document.getElementById('root')
+    </StrictMode>
 );
