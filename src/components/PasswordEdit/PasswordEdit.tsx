@@ -11,9 +11,8 @@ import LabelledIconButton from 'components/LabelledIconButton';
 import TextArea from 'atoms/TextArea';
 
 function PasswordEdit({ onCancel, onDelete, onSave, password }: any) {
-  const [values, setValues] = useState(password);
-
   const [urlInput, setUrlInput] = useState('');
+  const [values, setValues] = useState(password);
 
   function change(partial: any) {
     setValues((values: any) => ({ ...values, ...partial }));

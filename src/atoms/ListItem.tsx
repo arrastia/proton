@@ -15,10 +15,10 @@ function ListItem({ className, clickable, dense, onClick, ...rest }: Props) {
     [classes.dense]: dense
   });
 
-  function handleClick(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-    onClick && onClick(e);
+  function handleClick(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+    onClick && onClick(event);
 
-    const { currentTarget: node } = e;
+    const { currentTarget: node } = event;
 
     if (node.classList.contains(classes.selected)) {
       node.classList.remove(classes.selected);

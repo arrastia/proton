@@ -20,7 +20,7 @@ function Passwords({ editing, passwords, onSelectPassword }: Props) {
     }
 
     return (
-      <PasswordListItem key={password.name} name={password.name} disabled={editing} onClick={handleClick} vulnerable={password.value.length < 2} />
+      <PasswordListItem disabled={editing} key={password.name} name={password.name} onClick={handleClick} vulnerable={password.value.length < 2} />
     );
   }
 

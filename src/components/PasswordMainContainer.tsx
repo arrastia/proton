@@ -27,9 +27,8 @@ interface Props {
 }
 
 const PasswordMain = ({ decryptedPasswords, onLogout, onPasswordCreated, onPasswordEdited, onPasswordDeleted }: Props) => {
-  const [selectedPasswordId, setSelectedPasswordId] = useState<string | null>(null);
-
   const [editing, setEditing] = useState(false);
+  const [selectedPasswordId, setSelectedPasswordId] = useState<string | null>(null);
 
   function handleCreatePassword() {
     const newPassword = createNewPassword();
