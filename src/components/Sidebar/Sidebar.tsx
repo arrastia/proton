@@ -9,7 +9,7 @@ export const Sidebar = () => {
       <h1>Order summary</h1>
       <Divider />
       TOTAL COST
-      <Button>CHECKIOt</Button>
+      <Button>klasjd</Button>
     </aside>
   );
 };
