@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 import * as storage from 'storage';
 import { encrypt, decrypt, getKey, base64StringToUint8Array } from '../../crypto';
 import { wait } from 'helpers';
 import { CRYPTO_KEY_STORAGE_KEY, PASSWORDS_STORAGE_KEY } from '../../constants';
 
+import Layout from 'components/Layout';
 import PasswordLockedContainer from 'components/PasswordLockedContainer';
 import PasswordMainContainer from 'components/PasswordMainContainer';
-import Layout from 'components/Layout';
+
+import { tokenState } from 'stores/UserStore';
 
 import type { Password } from 'models';
 import type { ReactNode } from 'react';
@@ -17,12 +20,16 @@ function duplicateUrlsAmongPasswords(passwords: { [id: string]: Password }) {
 }
 
 export function Dashboard() {
+  const setToken = useSetRecoilState(tokenState);
+
   const [decryptedPasswords, setDecryptedPasswords] = useState<{ [id: string]: Password }>({});
   const [key, setKey] = useState<CryptoKey | null>(null);
   const [loading, setLoading] = useState(true);
 
   async function hydratePasswords(newKey: CryptoKey) {
     setKey(newKey);
+    setToken(newKey);
+
     await wait(500);
     const encryptedPasswords = JSON.parse(storage.getItem(PASSWORDS_STORAGE_KEY));
     if (!encryptedPasswords) {
@@ -55,6 +62,7 @@ export function Dashboard() {
 
     getKey(base64StringToUint8Array(rawCryptoKey)).then(storedKey => {
       setKey(storedKey);
+      setToken(storedKey);
       handleSuccess(storedKey);
       setLoading(false);
     });
@@ -65,6 +73,7 @@ export function Dashboard() {
       if (!key) {
         return;
       }
+
       const data = JSON.stringify(decryptedPasswords);
       const encryptedPasswords = await encrypt(key, data);
       storage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(encryptedPasswords));
@@ -76,6 +85,7 @@ export function Dashboard() {
   function handleLogout() {
     storage.removeItem(CRYPTO_KEY_STORAGE_KEY);
     setKey(null);
+    setToken(null);
   }
 
   function handlePasswordCreated(password: Password) {
