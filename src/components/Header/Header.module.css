@@ -1,0 +1,22 @@
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.header {
+  align-items: center;
+  border-bottom: 1px solid #dbdbe0;
+  display: flex;
+  flex-shrink: 0;
+  height: 58px;
+  justify-content: space-between;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 945px) {
+  .header .avatar {
+    display: none;
+  }
+}

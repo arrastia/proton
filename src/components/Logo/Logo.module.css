@@ -1,0 +1,11 @@
+.logo {
+  cursor: pointer;
+  transition: transform 0.1s ease-in;
+  user-select: none;
+  width: clamp(4rem, 15vw, 7rem);
+}
+
+.logo:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in;
+}
