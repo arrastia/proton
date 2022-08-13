@@ -4,4 +4,4 @@ export interface DividerProps {
   direction?: 'horizontal' | 'vertical';
 }
 
-export const Divider = ({ direction = 'horizontal' }: DividerProps) => <hr className={`${styles.divider} ${direction}`} />;
+export const Divider = ({ direction = 'horizontal' }: DividerProps) => <hr className={`${styles.divider} ${styles[direction]}`} />;
