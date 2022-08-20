@@ -1,0 +1,24 @@
+.container {
+  /* height: 100vh; */
+  /* align-items: center;
+  background: var(--proton-blue);
+  display: flex;
+  justify-content: center; */
+}
+
+.form {
+  align-items: stretch;
+  background: var(--white);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  /* max-width: 60%; */
+  padding: 2rem;
+  /* width: 560px; */
+  align-self: center;
+  width: 100%;
+}
+
+.form > * {
+  margin: 8px 0;
+}
