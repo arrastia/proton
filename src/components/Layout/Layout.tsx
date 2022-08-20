@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import styles from './Layout.module.css';
@@ -7,20 +8,16 @@ import Sidebar from 'components/Sidebar';
 
 import { tokenState } from 'stores/UserStore';
 
-import type { ReactNode } from 'react';
-
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = () => {
   const token = useRecoilValue(tokenState);
+
+  console.log(' enbwtoken :>> ', token);
 
   return (
     <div className={styles.layout}>
-      <Header />
+      {token ? <Header /> : null}
       <main className={styles.main}>
-        {children}
+        <Outlet />
         {token ? <Sidebar /> : null}
       </main>
     </div>

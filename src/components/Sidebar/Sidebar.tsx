@@ -1,15 +1,12 @@
-import styles from './Sidebar.module.css';
+import classes from './Sidebar.module.css';
 
-import Button from 'atoms/Button';
-import Divider from 'components/Divider';
+import { PasswordForm } from 'components/PasswordForm';
 
 export const Sidebar = () => {
   return (
-    <aside className={styles.sidebar}>
-      <h1>Order summary</h1>
-      <Divider />
-      TOTAL COST
-      <Button>klasjd</Button>
+    <aside className={classes.sidebar}>
+      {/* <PasswordForm /> */}
+      <p>Select an account to view its details</p>
     </aside>
   );
 };
