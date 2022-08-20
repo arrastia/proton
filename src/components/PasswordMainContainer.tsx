@@ -7,8 +7,9 @@ import AppHeader from './AppHeader';
 import NoPasswords from './NoPasswords';
 import NoPasswordSelected from './NoPasswordSelected';
 import PasswordEdit from './PasswordEdit';
-import Passwords from './Passwords';
 import PasswordView from './PasswordView';
+
+import { Passwords } from 'components/Passwords/Passwords';
 
 import type { Password } from '../models';
 
@@ -76,13 +77,8 @@ const PasswordMain = ({ decryptedPasswords, onLogout, onPasswordCreated, onPassw
         />
       </div>
 
-      <div className={classes.passwordsArea}>
-        {Object.values(decryptedPasswords).length > 0 ? (
-          <Passwords editing={editing} onSelectPassword={handleSelectPassword} passwords={decryptedPasswords} />
-        ) : (
-          <NoPasswords />
-        )}
-      </div>
+      {/* <div className={classes.passwordsArea}>{Object.values(decryptedPasswords).length > 0 ? <Passwords /> : <NoPasswords />}</div> */}
+      <div className={classes.passwordsArea}>{<Passwords />}</div>
 
       <div className={classes.passwordArea}>
         {selectedPasswordId !== null ? (
