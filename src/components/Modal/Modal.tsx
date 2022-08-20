@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import classes from './Modal.module.css';
+import { Styles } from './Modal.styles';
 
 import type { ModalProps } from './@types/Modal.types';
 import type { RefObject } from 'react';
@@ -29,26 +29,28 @@ export const Modal = ({ children, isFooterVisible, isVisible, onClose, title }: 
   const onLeave = () => setAnimationStatus('leave');
 
   const renderFooter = () => (
-    <footer className={classes.footer}>
-      <span className={classes.buttonWrapper}>
+    <Styles.Footer>
+      <Styles.ButtonWrapper>
+        {/* <Button category={'transparent'} label={'Cancel'} onClick={onClose} />
+        <Button category={'primary'} label={'Confirm'} /> */}
         <Button onClick={onClose}>CANCEL</Button>
         <Button>CONFIRM</Button>
-      </span>
-    </footer>
+      </Styles.ButtonWrapper>
+    </Styles.Footer>
   );
 
   const renderModal = () => (
-    <div className={classes.modal} onAnimationEnd={onAnimationEnd} ref={modalRef} tabIndex={-1}>
-      <div className={classes.mask} onClick={onClose} />
-      <div className={classes.dialog}>
-        <button className={classes.closeButton} onClick={onClose} tabIndex={0} />
-        <div className={classes.content}>
-          {title ? <h3 className={classes.title}>{'Title'}</h3> : null}
+    <Styles.Modal animationStatus={animationStatus} onAnimationEnd={onAnimationEnd} ref={modalRef} tabIndex={-1}>
+      <Styles.Mask onClick={onClose} />
+      <Styles.Dialog animationStatus={animationStatus} className={animationStatus}>
+        <Styles.CloseButton onClick={onClose} tabIndex={0} />
+        <Styles.Content>
+          {title ? <Styles.Title>{'Title'}</Styles.Title> : null}
           {children}
-        </div>
+        </Styles.Content>
         {isFooterVisible ? renderFooter() : null}
-      </div>
-    </div>
+      </Styles.Dialog>
+    </Styles.Modal>
   );
 
   return createPortal(isDialogMounted ? renderModal() : null, modalsPortal);
