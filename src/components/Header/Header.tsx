@@ -6,7 +6,7 @@ import Logo from 'components/Logo';
 
 import { ComponentPropsWithoutRef, Fragment, useState } from 'react';
 import { Modal } from 'components/Modal';
-import { PasswordForm } from 'components/PasswordForm';
+import Form from 'components/Form';
 import { useAddPassword } from 'hooks/usePasswords/useAddPassword';
 import { useAuth } from 'hooks/useAuth';
 
@@ -25,22 +25,18 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
 
         <div className={styles.actionButtons}>
           <Button
-            // disabled={isEditing}
             onClick={() => {
               setIsVisible(true);
               addPassword();
-            }}
-          >
+            }}>
             New Password
           </Button>
           <Button onClick={handleLogout}>Log out</Button>
-          {/* <Button label="Log in"></Button> */}
-          {/* <ThemeButton /> */}
         </div>
       </header>
 
       <Modal isVisible={isVisible} onClose={() => setIsVisible(false)}>
-        <PasswordForm id={id} />
+        <Form id={id} />
       </Modal>
     </Fragment>
   );

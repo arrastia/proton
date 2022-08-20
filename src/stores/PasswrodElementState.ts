@@ -1,9 +1,6 @@
-import { selectorFamily } from 'recoil';
+import { atomFamily, selectorFamily } from 'recoil';
 
-export const passUrlsState = selectorFamily<any[], string>({
-  key: 'passUrlsState',
-  get:
-    (id: string) =>
-    ({ get }) =>
-      []
+export const passwordElementState = atomFamily({
+  key: 'passwordElementState',
+  default: ''
 });

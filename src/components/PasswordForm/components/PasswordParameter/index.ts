@@ -1,1 +1,0 @@
-export { PasswordParameter } from './PasswordParameter';
