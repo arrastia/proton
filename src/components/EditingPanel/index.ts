@@ -1,1 +1,0 @@
-export { EditingPanel } from './EditingPanel';
