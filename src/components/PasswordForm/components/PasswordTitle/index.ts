@@ -1,0 +1,1 @@
+export { PasswordTitle } from './PasswordTitle';
