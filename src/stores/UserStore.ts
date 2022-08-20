@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const tokenState = atom<CryptoKey | null>({
+export const tokenState = atom<CryptoKey | string | null>({
   key: 'tokenState',
   default: null
 });

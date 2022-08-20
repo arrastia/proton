@@ -2,14 +2,33 @@ import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 import type { Password } from 'models';
 
+export const isEditingState = atom({
+  key: 'isEditingState',
+  default: false
+});
+
 export const allPasswordsState = atom<Password[]>({
   key: 'allPasswordsState',
   default: []
 });
 
+export const passwordState = atom<Password | null>({
+  key: 'passwordState',
+  default: null
+});
+
 export const passwordsState = atomFamily<Password, string>({
   key: 'passwordsState',
-  default: () => ({ createdAt: Date.now(), description: '', id: '', lastModifiedAt: Date.now(), name: '', url: [], value: '' })
+  default: () => ({
+    createdAt: Date.now(),
+    description: '',
+    id: '',
+    lastModifiedAt: Date.now(),
+    name: '',
+    url: [],
+    username: '',
+    value: ''
+  })
 });
 
 export const selectedPasswordIdState = atom<string>({
