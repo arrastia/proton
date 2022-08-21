@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
     * { 
       box-sizing: border-box;
       margin: 0;
@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
       align-items: center;
       display: flex;
+      background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--white)' : 'var(--proton-blue)')};
       flex-direction: column;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
       height: 100vh;
