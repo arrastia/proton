@@ -18,7 +18,6 @@ export const URLs = ({ id }: { id: string }) => {
 
   const handleUrlAdd = () => {
     if (!validateUrl(input)) {
-      // console.log('input :>> ', input);
       return;
     }
 

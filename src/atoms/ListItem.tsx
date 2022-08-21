@@ -7,24 +7,18 @@ import type React from 'react';
 interface Props extends React.ComponentPropsWithoutRef<'li'> {
   clickable?: boolean;
   dense?: boolean;
+  isSelected?: boolean;
 }
 
-function ListItem({ className, clickable, dense, onClick, ...rest }: Props) {
+function ListItem({ className, clickable, dense, onClick, isSelected, ...rest }: Props) {
   const rootClassName = clsx(className, classes.root, {
     [classes.clickable]: clickable,
-    [classes.dense]: dense
+    [classes.dense]: dense,
+    [classes.selected]: isSelected
   });
 
   function handleClick(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-    onClick && onClick(event);
-
-    const { currentTarget: node } = event;
-
-    if (node.classList.contains(classes.selected)) {
-      node.classList.remove(classes.selected);
-    } else {
-      node.classList.add(classes.selected);
-    }
+    onClick?.(event);
   }
 
   return <li className={rootClassName} onClick={handleClick} {...rest} />;

@@ -12,8 +12,6 @@ import type { Password as TPass } from 'models';
 export const Passwords = () => {
   const passwords = useRecoilValue(allPasswordsState);
 
-  console.log('passwords :>> ', passwords);
-
   const renderListItem = (password: TPass) => <Password key={password.id} {...password} isVulnerable={false} />;
 
   return <List className={classes.passwords}>{passwords.map(renderListItem)}</List>;

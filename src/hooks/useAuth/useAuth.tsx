@@ -14,10 +14,12 @@ import { arrayBufferToBase64, decrypt, getDerivation, getKey } from 'utils/crypt
 import { wait } from 'helpers';
 
 import type { Location } from 'react-router-dom';
+import { toasting } from 'components/Toast/toasting';
 
 interface LocationFrom extends Location {
   state: { pathname: string };
 }
+const notify = () => toasting.error('Here is your toast.');
 
 export const useAuth = () => {
   const setToken = useSetRecoilState(tokenState);
@@ -41,6 +43,8 @@ export const useAuth = () => {
       setToken(rawPassword);
       navigate(state?.pathname || routes.HOME, { replace: true });
       storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
+    } else {
+      notify();
     }
   };
 

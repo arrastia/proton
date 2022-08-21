@@ -1,14 +1,11 @@
-import { useRecoilCallback, useRecoilValue } from 'recoil';
+import { useId } from 'react';
+import { useRecoilCallback } from 'recoil';
 
-import uniqid from 'uniqid';
-
-import { allPasswordsState, isEditingState, passwordsState, selectedPasswordIdState } from 'stores/PasswordStore';
+import { allPasswordsState, passwordsState, selectedPasswordIdState } from 'stores/PasswordStore';
 
 import type { Password } from 'models';
 
-function createNewPassword(): Password {
-  const id = uniqid();
-
+function createNewPassword(id: string): Password {
   return {
     createdAt: Date.now(),
     description: '',
@@ -22,19 +19,17 @@ function createNewPassword(): Password {
 }
 
 export const useAddPassword = () => {
-  const password = createNewPassword();
+  const password = createNewPassword(useId());
 
-  const isEditing = useRecoilValue(isEditingState);
   const addPassword = useRecoilCallback(
     ({ set }) =>
       () => {
         set(allPasswordsState, passwords => [...passwords, password]);
         set(passwordsState(password.id), password);
-        set(isEditingState, true);
         set(selectedPasswordIdState, password.id);
       },
     []
   );
 
-  return { addPassword, isEditing, id: password.id };
+  return { addPassword, id: password.id };
 };
