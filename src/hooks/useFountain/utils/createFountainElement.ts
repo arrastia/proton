@@ -4,7 +4,7 @@ import type { Particle } from '../@types/useCoolMode.types';
 
 let instanceCounter = 0;
 
-export function createFountainElement(element: HTMLElement, imageUrl: string, disabled?: boolean, ignoreCoolModeDocsDemo?: boolean): () => void {
+export function createFountainElement(element: HTMLElement, imageUrl: string | string[], disabled?: boolean, ignoreCoolModeDocsDemo?: boolean) {
   instanceCounter++;
 
   const sizes = [15, 20, 25, 35, 45];
@@ -28,7 +28,9 @@ export function createFountainElement(element: HTMLElement, imageUrl: string, di
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
     const particle = document.createElement('div');
-    particle.innerHTML = `<img src="${imageUrl}" width="${size}" height="${size}" style="border-radius: 25%">`;
+    const image = Array.isArray(imageUrl) ? imageUrl[Math.floor(Math.random() * imageUrl.length)] : [imageUrl];
+
+    particle.innerHTML = `<img src="${image}" width="${size}" height="${size}" style="border-radius: 25%">`;
     particle.setAttribute(
       'style',
       ['position:absolute', 'will-change:transform', `top:${top}px`, `left:${left}px`, `transform:rotate(${spinVal}deg)`].join(';')
