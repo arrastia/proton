@@ -11,8 +11,6 @@ import { tokenState } from 'stores/UserStore';
 export const Layout = () => {
   const token = useRecoilValue(tokenState);
 
-  console.log(' enbwtoken :>> ', token);
-
   return (
     <div className={styles.layout}>
       {token ? <Header /> : null}
