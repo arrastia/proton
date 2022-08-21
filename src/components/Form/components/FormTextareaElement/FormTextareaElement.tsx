@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 
-import Labelled from 'atoms/Labelled';
-import TextArea from 'atoms/TextArea';
+import { Labelled } from 'atoms/Labelled';
+import { Textarea } from 'atoms/Textarea';
 
 import { passwordElementState } from 'stores/PasswordElementState';
 
@@ -17,7 +17,7 @@ export const FormTextareaElement = ({ element, id }: { id: string; element: keyo
 
   return (
     <Labelled label="description">
-      <TextArea name="description" onChange={handleChange} value={value} />
+      <Textarea name="description" onChange={handleChange} value={value} />
     </Labelled>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../atoms/Button';
+import { Button } from '../atoms/Button/Button';
 import Header from '../atoms/Header';
 import Icon from '../atoms/Icon';
 import classes from './AppHeader.module.css';

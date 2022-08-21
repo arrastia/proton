@@ -1,6 +1,6 @@
 import classes from './Form.module.css';
 
-import Button from 'atoms/Button';
+import { Button } from 'atoms/Button/Button';
 import Divider from 'components/Divider';
 import FormInputElement from './components/FormInputElement';
 import FormTextareaElement from './components/FormTextareaElement';

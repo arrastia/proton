@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 
 import classes from './Passwords.module.css';
 
-import List from 'atoms/List';
+import { List } from 'atoms/List';
 import { Password } from './components/Password';
 
 import { allPasswordsState } from 'stores/PasswordStore';

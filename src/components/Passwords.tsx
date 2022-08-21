@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import classes from './Passwords.module.css';
 
-import List from 'atoms/List';
+import { List } from 'atoms/List';
 import PasswordListItem from './PasswordListItem';
 
 import type { Password } from '../models';

@@ -1,12 +1,15 @@
-import classes from './LabelledIconButton.module.css';
-import Button, { ButtonProps } from '../atoms/Button';
 import clsx from 'clsx';
 
-import type React from 'react';
+import classes from './LabelledIconButton.module.css';
+
+import { Button } from '../atoms/Button/Button';
+
+import type { ButtonProps } from 'atoms/Button';
+import type { ReactNode } from 'react';
 
 interface LabelledIconButtonProps extends ButtonProps {
   label: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   className?: string;
 }
 

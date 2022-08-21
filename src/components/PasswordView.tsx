@@ -1,7 +1,7 @@
 import classes from './PasswordView.module.css';
 
 import Icon from 'atoms/Icon';
-import Labelled from 'atoms/Labelled';
+import { Labelled } from 'atoms/Labelled';
 import LabelledIconButton from './LabelledIconButton';
 
 import type { Password } from '../models';

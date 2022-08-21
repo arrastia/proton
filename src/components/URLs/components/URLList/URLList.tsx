@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import classes from './URLList.module.css';
 
 import Icon from 'atoms/Icon';
-import List from 'atoms/List';
+import { List } from 'atoms/List';
 import ListItem from 'atoms/ListItem';
 
 import { passwordsState } from 'stores/PasswordStore';

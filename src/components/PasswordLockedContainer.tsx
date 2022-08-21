@@ -5,7 +5,7 @@ import { wait } from '../helpers';
 import { arrayBufferToBase64, decrypt, getDerivation, getKey } from '../crypto';
 import * as storage from '../storage';
 import classes from './PasswordLockedContainer.module.css';
-import Button from '../atoms/Button';
+import { Button } from '../atoms/Button/Button';
 import Input from '../atoms/Input';
 
 interface Props {

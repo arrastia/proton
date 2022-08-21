@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import classes from '../../PasswordEdit.module.css';
 
 import Icon from 'atoms/Icon';
-import List from 'atoms/List';
+import { List } from 'atoms/List';
 import ListItem from 'atoms/ListItem';
 
 type Props = {

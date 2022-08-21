@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 
 import Input from 'atoms/Input';
-import Labelled from 'atoms/Labelled';
+import { Labelled } from 'atoms/Labelled';
 
 import { passwordElementState } from 'stores/PasswordElementState';
 

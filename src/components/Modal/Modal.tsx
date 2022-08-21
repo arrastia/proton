@@ -5,7 +5,7 @@ import { Styles } from './Modal.styles';
 
 import type { ModalProps } from './@types/Modal.types';
 import type { RefObject } from 'react';
-import Button from 'atoms/Button';
+import { Button } from 'atoms/Button/Button';
 
 const modalsPortal = document.getElementById('modals') as HTMLElement;
 

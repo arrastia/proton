@@ -1,6 +1,6 @@
 import classes from './Login.module.css';
 
-import Button from 'atoms/Button';
+import { Button } from 'atoms/Button/Button';
 import Input from 'atoms/Input';
 
 import { useAuth } from 'hooks/useAuth/useAuth';
@@ -34,7 +34,7 @@ export const Login = () => {
 
 // import { CRYPTO_KEY_STORAGE_KEY, encryptedValidation, PASSWORDS_STORAGE_KEY } from '../../constants';
 
-// import Button from 'atoms/Button';
+// import { Button } from 'atoms/Button';
 // import Input from 'atoms/Input';
 // import Layout from 'components/Layout';
 

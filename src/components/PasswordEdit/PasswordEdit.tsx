@@ -2,13 +2,13 @@ import { useCallback, useState } from 'react';
 
 import classes from './PasswordEdit.module.css';
 
+import { Button } from 'atoms/Button/Button';
+import { Labelled } from 'atoms/Labelled';
+import { Textarea } from 'atoms/Textarea';
 import { UrlList } from './components/UrlList/UrlList';
-import Button from 'atoms/Button';
 import Icon from 'atoms/Icon';
 import Input from 'atoms/Input';
-import Labelled from 'atoms/Labelled';
 import LabelledIconButton from 'components/LabelledIconButton';
-import TextArea from 'atoms/TextArea';
 
 function PasswordEdit({ onCancel, onDelete, onSave, password }: any) {
   const [urlInput, setUrlInput] = useState('');
@@ -62,7 +62,7 @@ function PasswordEdit({ onCancel, onDelete, onSave, password }: any) {
       </h2>
       <div className={classes.content}>
         <Labelled label="description">
-          <TextArea name="description" onChange={handleChange} value={values.description} />
+          <Textarea name="description" onChange={handleChange} value={values.description} />
         </Labelled>
 
         <Labelled label="value">

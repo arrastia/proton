@@ -10,8 +10,8 @@ export const Dashboard = () => {
 
   return (
     <Styles.View>
-      {passwords.map(({ id, name, username }) => (
-        <PassList key={id} id={id} name={name} username={username} />
+      {passwords.map(({ id, name, username, lastModifiedAt }) => (
+        <PassList key={id} id={id} name={name} username={username} lastModifiedAt={lastModifiedAt} />
       ))}
     </Styles.View>
   );

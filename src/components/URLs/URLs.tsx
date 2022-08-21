@@ -2,9 +2,9 @@ import { useSetRecoilState } from 'recoil';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import URLList from './components/URLList';
-import Button from 'atoms/Button';
+import { Button } from 'atoms/Button/Button';
 import Input from 'atoms/Input';
-import Labelled from 'atoms/Labelled';
+import { Labelled } from 'atoms/Labelled';
 
 import type { Url } from 'models/Url';
 import { passwordsState } from 'stores/PasswordStore';

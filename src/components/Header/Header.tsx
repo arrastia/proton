@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, Fragment, useId, useState } from 'react';
 import styles from './Header.module.css';
 
 import { Modal } from 'components/Modal';
-import Button from 'atoms/Button';
+import { Button } from 'atoms/Button/Button';
 import Form from 'components/Form';
 import Logo from 'components/Logo';
 
