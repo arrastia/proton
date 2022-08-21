@@ -2,9 +2,9 @@ import clsx from 'clsx';
 
 import classes from './Header.module.css';
 
-import type React from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
-export type HeaderProps = React.ComponentPropsWithoutRef<'header'>;
+export type HeaderProps = ComponentPropsWithoutRef<'header'>;
 
 function Header({ className, ...rest }: HeaderProps) {
   const rootClassName = clsx(classes.root, className);

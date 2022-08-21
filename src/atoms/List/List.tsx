@@ -6,8 +6,6 @@ import type React from 'react';
 
 export type ListProps = React.ComponentPropsWithoutRef<'ul'>;
 
-function List({ className, ...rest }: ListProps) {
+export function List({ className, ...rest }: ListProps) {
   return <ul className={clsx(className, classes.root)} {...rest} />;
 }
-
-export default List;
