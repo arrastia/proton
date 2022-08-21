@@ -1,20 +1,29 @@
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
-import type { Password } from 'models';
+import { PASSWORDS_STORAGE_KEY } from 'configuration/constants/storage';
 
-export const isEditingState = atom({
-  key: 'isEditingState',
-  default: false
-});
+import { passwordStore } from './PasswordElementState';
+
+import type { Password } from 'models';
 
 export const allPasswordsState = atom<Password[]>({
   key: 'allPasswordsState',
-  default: []
-});
+  default: [],
+  // effects: `[32m[allPasswordsState][0m`
+  effects: [
+    ({ setSelf, onSet }) =>
+      () => {
+        const savedValue = localStorage.getItem(PASSWORDS_STORAGE_KEY);
+        console.log('savedValue', savedValue);
+        if (savedValue != null) {
+          setSelf(JSON.parse(savedValue));
+        }
 
-export const passwordState = atom<Password | null>({
-  key: 'passwordState',
-  default: null
+        onSet((newValue, _, isReset) => {
+          isReset ? localStorage.removeItem(PASSWORDS_STORAGE_KEY) : localStorage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(newValue));
+        });
+      }
+  ]
 });
 
 export const passwordsState = atomFamily<Password, string>({
@@ -36,15 +45,6 @@ export const selectedPasswordIdState = atom<string>({
   default: ''
 });
 
-export const selectedElementState = selector<Password>({
-  key: 'selectedElement',
-  get: ({ get }) => {
-    const id = get(selectedPasswordIdState);
-
-    return get(passwordsState(id));
-  }
-});
-
 export const isSelectedState = selectorFamily({
   key: 'isSelected',
   get:
@@ -53,4 +53,13 @@ export const isSelectedState = selectorFamily({
       const selectedId = get(selectedPasswordIdState);
       return selectedId === id;
     }
+});
+
+export const selectedElementState = selector<Password>({
+  key: 'selectedElement',
+  get: ({ get }) => {
+    const id = get(selectedPasswordIdState);
+
+    return get(passwordStore(id));
+  }
 });
