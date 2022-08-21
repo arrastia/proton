@@ -1,27 +1,63 @@
-import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import { atom, atomFamily, DefaultValue, selector, selectorFamily } from 'recoil';
+import * as storage from 'storage';
 
-import { PASSWORDS_STORAGE_KEY } from 'configuration/constants/storage';
+import { CRYPTO_KEY_STORAGE_KEY, PASSWORDS_STORAGE_KEY } from 'configuration/constants/storage';
 
 import { passwordStore } from './PasswordElementState';
 
+import { base64StringToUint8Array, getKey } from 'utils/crypto';
+import { decryptMessage, encryptMessage } from 'utils/CryptographyUtils/crypto';
+
 import type { Password } from 'models';
+
+const setValues = async (newValue: Password[], oldValue: Password[] | DefaultValue, isReset: boolean) => {
+  const rawCryptoKey = storage.getItem<string>(CRYPTO_KEY_STORAGE_KEY);
+  const key = await getKey(base64StringToUint8Array(rawCryptoKey));
+  const encryptedPasswords = await encryptMessage(key, JSON.stringify(newValue));
+
+  const buffer = new Uint8Array(encryptedPasswords);
+  const decryptedPasswords = await decryptMessage(key, buffer);
+
+  const result = new TextDecoder().decode(decryptedPasswords);
+  console.log('RPEV DEV', result);
+
+  if (isReset) {
+    storage.removeItem(PASSWORDS_STORAGE_KEY);
+  } else {
+    storage.setItem(PASSWORDS_STORAGE_KEY, buffer);
+  }
+};
 
 export const allPasswordsState = atom<Password[]>({
   key: 'allPasswordsState',
   default: [],
-  // effects: `[32m[allPasswordsState][0m`
   effects: [
-    ({ setSelf, onSet }) =>
+    ({ setSelf, onSet, trigger }) =>
       () => {
-        const savedValue = localStorage.getItem(PASSWORDS_STORAGE_KEY);
-        console.log('savedValue', savedValue);
-        if (savedValue != null) {
-          setSelf(JSON.parse(savedValue));
-        }
+        const loadPersisted = async () => {
+          const savedValue = storage.getItem<Uint8Array>(PASSWORDS_STORAGE_KEY);
 
-        onSet((newValue, _, isReset) => {
-          isReset ? localStorage.removeItem(PASSWORDS_STORAGE_KEY) : localStorage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(newValue));
-        });
+          if (savedValue != null) {
+            // const parsedSaved = base64StringToUint8Array(savedValue);
+            const rawCryptoKey = storage.getItem(CRYPTO_KEY_STORAGE_KEY) as string;
+            const key = await getKey(base64StringToUint8Array(rawCryptoKey));
+
+            console.log('savedValue', savedValue);
+
+            const decryptedPasswords = await decryptMessage(key, new Uint8Array(savedValue));
+            console.log('decryptedPasswords', decryptedPasswords);
+
+            const result = new TextDecoder().decode(decryptedPasswords);
+            console.log('result', result);
+
+            setSelf(JSON.parse(result));
+          }
+        };
+
+        if (trigger === 'get') {
+          loadPersisted().catch(error => console.error(error));
+        }
+        onSet(setValues);
       }
   ]
 });

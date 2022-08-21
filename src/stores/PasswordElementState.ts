@@ -19,8 +19,6 @@ export const passwordStore = selectorFamily<Password, string>({
       const username = get(passwordElementState(`username_${id}`));
       const value = get(passwordElementState(`value_${id}`));
 
-      console.log('title', title);
-
       return { createdAt: Date.now(), description, id, lastModifiedAt: Date.now(), name: title, url: [], username, value };
     }
 });
