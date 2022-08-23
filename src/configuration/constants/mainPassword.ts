@@ -1,0 +1,1 @@
+export const MAIN_PASSWORD_VALIDATION = 'VJrupYy4825atE1ycOLRqOjFVnQKNAzRTNGMaPqjc+A=';

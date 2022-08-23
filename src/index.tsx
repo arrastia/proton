@@ -5,7 +5,7 @@ import { RecoilRoot } from 'recoil';
 import './index.css';
 import './colors.css';
 
-import { CRYPTO_KEY_STORAGE_KEY } from 'configuration/constants/storage';
+import { CRYPTO_KEY_STORAGE_KEY, PASSWORDS_STORAGE_KEY } from 'configuration/constants/storage';
 
 import App from './App';
 import seed from './seed.json';
@@ -14,10 +14,10 @@ import { tokenState } from 'stores/UserStore';
 
 import type { SetRecoilState } from 'recoil';
 
-const passwords = window.localStorage.getItem('passwords');
+const passwords = window.localStorage.getItem(PASSWORDS_STORAGE_KEY);
 
 if (passwords === null) {
-  window.localStorage.setItem('passwords', JSON.stringify(seed));
+  window.localStorage.setItem(PASSWORDS_STORAGE_KEY, JSON.stringify(null));
 }
 
 function initializeUserSettings({ set }: { set: SetRecoilState }) {
