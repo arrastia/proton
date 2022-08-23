@@ -4,8 +4,10 @@ export interface Password {
   createdAt: number;
   description?: string;
   id: string;
-  lastModifiedAt?: number;
+  isVulnerable?: boolean;
+  lastModifiedAt: number;
   name: string;
+  thumbnail?: string;
   url: IUrl[];
   username: string;
   value: string;
