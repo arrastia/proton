@@ -1,0 +1,1 @@
+export { PasswordThumbnail } from './PasswordThumbnail';
