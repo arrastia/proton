@@ -4,10 +4,12 @@ import classes from './Input.module.css';
 
 import type React from 'react';
 
-interface Props extends React.ComponentProps<'input'> {}
+interface Props extends React.ComponentProps<'input'> {
+  isInvalid?: boolean;
+}
 
-function Input({ className, ...rest }: Props) {
-  return <input className={clsx(className, classes.root)} {...rest} />;
+function Input({ className, isInvalid, ...rest }: Props) {
+  return <input className={clsx(className, classes.root, { [classes.invalid]: isInvalid })} {...rest} />;
 }
 
 export default Input;
