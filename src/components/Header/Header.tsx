@@ -1,4 +1,5 @@
-import { ComponentPropsWithoutRef, Fragment, useId, useState } from 'react';
+import { Fragment, useState } from 'react';
+import { useResetRecoilState } from 'recoil';
 
 import styles from './Header.module.css';
 
@@ -8,19 +9,22 @@ import Form from 'components/Form';
 import Logo from 'components/Logo';
 
 import { useAuth } from 'hooks/useAuth';
-import { usePasswords } from './usePasswords';
 
-import type { Password } from 'models';
+import { isAttemptedState } from 'stores/FormStore';
+
+import type { ComponentPropsWithoutRef } from 'react';
 
 export type HeaderProps = ComponentPropsWithoutRef<'header'>;
 
 export const Header = ({ className, ...rest }: HeaderProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { addPassword } = usePasswords();
+  const resetAttemptedState = useResetRecoilState(isAttemptedState);
+
   const { handleLogout } = useAuth();
 
-  const handleSave = () => {
+  const onCleanUpModal = () => {
+    resetAttemptedState();
     setIsVisible(false);
   };
 
@@ -34,8 +38,8 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
         </div>
       </header>
 
-      <Modal isVisible={isVisible} onClose={() => setIsVisible(false)}>
-        <Form onSave={handleSave} />
+      <Modal isVisible={isVisible} onClose={onCleanUpModal}>
+        <Form onCancel={onCleanUpModal} onSave={onCleanUpModal} />
       </Modal>
     </Fragment>
   );
