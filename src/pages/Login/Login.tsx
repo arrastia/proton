@@ -5,15 +5,26 @@ import Input from 'atoms/Input';
 
 import { useAuth } from 'hooks/useAuth/useAuth';
 
+import { arrayBufferToBase64, encrypt, getDerivation, getKey } from 'utils/crypto';
+import { decryptMessage, encryptMessage } from 'utils/CryptographyUtils/crypto';
+
+import type { FormEvent } from 'react';
+import { UserService } from 'core/services/User';
+
 export const Login = () => {
   const { handleLogin } = useAuth();
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
     const password = formData.get('password') as string;
 
+    const parsedPass = arrayBufferToBase64(await getDerivation(password));
+
+    const test = await UserService.verifyMainPassword();
+
+    console.log('test :>> ', test);
     await handleLogin(password);
   };
 
