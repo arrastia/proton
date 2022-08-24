@@ -7,20 +7,22 @@ import { GlobalStyles } from './Global.styles';
 import { routes } from 'configuration/routes';
 
 import Layout from 'components/Layout';
+import Toast from 'components/Toast';
 
-import MyDashboard from 'pages/MyDashboard';
 import Dashboard from 'pages/Dashboard';
 import Login from 'pages/Login';
 import NotFound from 'pages/NotFound';
 
-import { tokenState } from 'stores/UserStore';
-import Toast from 'components/Toast';
+import { isDarkModeState, tokenState } from 'stores/UserStore';
+
+import { light } from 'styles/themes';
 
 function App() {
   const token = useRecoilValue(tokenState);
+  const isDarkMode = useRecoilValue(isDarkModeState);
 
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={{ ...light }}>
       <GlobalStyles isAuthenticated={Boolean(token)} />
       <Toast toastOptions={{}} />
       <BrowserRouter>

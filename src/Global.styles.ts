@@ -45,3 +45,5 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
       text-align: left;
     }
 `;
+
+/* background: ${({ theme: { gradients }, isAuthenticated }) => (isAuthenticated ? 'var(--white)' : gradients.mail.gradient)}; */

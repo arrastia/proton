@@ -22,5 +22,34 @@ export const colors = {
 
   active: 'rgba(0, 0, 0, 0.2)',
   focus: 'rgba(0, 0, 0, 0.1)',
-  hover: 'rgba(0, 0, 0, 0.1)'
+  hover: 'rgba(0, 0, 0, 0.1)',
+
+  // PROTON LOGO COLORS
+  primary: '#6d4aff',
+  secondary: '#ab97ff',
+
+  // VPN
+  vpnMain: '#24ECC6',
+  vpnLight: '#ABFFEF',
+  vpnLightPurple: '#CAC9FF',
+
+  // Main
+  mailLightPurple: '#E2DBFF',
+  mailDarkPurple: '#6d4aff',
+
+  // Drive
+  driveDarkPink: '#FF62C0',
+  driveLightPurple: '#F8CCFF',
+  driveSemiLightPurple: '#AE8CFF',
+  driveDarkPurple: '#6d4aff',
+
+  // Calendar
+  calendarDarkBlue: '#59B6FF',
+  calendarLightBlue: '#ABE7FF',
+  calendarVeryLightBlue: '#C8E7FF',
+  calendarVeryLightPurple: '#BFD7FF',
+  calendarLightPurple: '#C4B4FF',
+  calendarVividPurple: '#6943F9',
+  calendarPurple: '#BCABFF',
+  calendarDarkPurple: '#6d4aff'
 };
