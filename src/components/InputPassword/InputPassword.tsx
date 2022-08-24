@@ -6,7 +6,7 @@ import { Input } from 'atoms/Input';
 
 import type { InputPasswordProps } from './@types/InputPassword.types';
 
-export const InputPassword = ({ type = 'password' }: InputPasswordProps) => {
+export const InputPassword = ({ type = 'password', ...rest }: InputPasswordProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = (event: any) => {
@@ -37,7 +37,7 @@ export const InputPassword = ({ type = 'password' }: InputPasswordProps) => {
 
   return (
     <Styles.Container>
-      <Input type={getType()} />
+      <Input type={getType()} {...rest} />
       {renderActionButton()}
     </Styles.Container>
   );
