@@ -12,7 +12,7 @@ import type { Password } from 'models';
 
 type PasswordElement = Pick<Password, 'description' | 'name' | 'username' | 'value'>;
 
-export const FormInputElement = ({ element, id, type }: { id: string; element: keyof PasswordElement; type?: InputPasswordType }) => {
+export const Username = ({ element, id, type }: { id: string; element: keyof PasswordElement; type?: InputPasswordType }) => {
   const [isAttempted, setIsAttempted] = useRecoilState(isAttemptedState);
   const [value, setValue] = useRecoilState(passwordElementState(`${element}_${id}`));
 

@@ -4,8 +4,6 @@ import classes from './Form.module.css';
 
 import { Button } from 'atoms/Button/Button';
 import Divider from 'components/Divider';
-import FormInputElement from './components/FormInputElement';
-import FormTextareaElement from './components/FormTextareaElement';
 import URLs from 'components/URLs';
 
 import { usePasswords } from 'components/Header/usePasswords';
@@ -15,6 +13,10 @@ import { passwordElementState } from 'stores/PasswordElementState';
 
 import type { Password } from 'models';
 import type { FormProps } from './@types/Form.types';
+import { PasswordName } from './components/PasswordName';
+import { PasswordValue } from './components/PasswordValue';
+import { PasswordDescription } from './components/PasswordDescription';
+import { Username } from './components/Username';
 
 const createPassword = (id: string): Password => {
   return { createdAt: Date.now(), description: '', id, lastModifiedAt: Date.now(), name: '', url: [], username: '', value: '' };
@@ -45,14 +47,14 @@ export const Form = ({ editId, onCancel, onDelete, onSave }: FormProps) => {
 
   return (
     <div className={classes.editingPanel}>
-      <FormInputElement element="name" id={id} />
+      <PasswordName id={id} />
       <Divider />
-      <FormInputElement element="username" id={id} />
-      <FormInputElement element="value" id={id} type="password" />
+      <Username element="username" id={id} />
+      <PasswordValue id={id} />
       <Divider />
       <URLs id={id} />
       <Divider />
-      <FormTextareaElement element="description" id={id} />
+      <PasswordDescription id={id} />
       <div className={`row ${classes.actionButtons}`}>
         {editId ? <Button onClick={onDelete}>Delete</Button> : null}
         <div className="row">
