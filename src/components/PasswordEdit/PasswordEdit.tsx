@@ -7,7 +7,7 @@ import { Labelled } from 'atoms/Labelled';
 import { Textarea } from 'atoms/Textarea';
 import { UrlList } from './components/UrlList/UrlList';
 import Icon from 'atoms/Icon';
-import Input from 'atoms/Input';
+import { Input } from 'atoms/Input';
 import LabelledIconButton from 'components/LabelledIconButton';
 
 function PasswordEdit({ onCancel, onDelete, onSave, password }: any) {

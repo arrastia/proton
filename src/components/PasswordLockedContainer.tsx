@@ -6,7 +6,7 @@ import { arrayBufferToBase64, decrypt, getDerivation, getKey } from '../crypto';
 import * as storage from '../storage';
 import classes from './PasswordLockedContainer.module.css';
 import { Button } from '../atoms/Button/Button';
-import Input from '../atoms/Input';
+import { Input } from '../atoms/Input';
 
 interface Props {
   onSuccess: (password: CryptoKey) => void;

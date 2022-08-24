@@ -1,15 +1,7 @@
-import clsx from 'clsx';
+import { InputStyles } from './Input.styles';
 
-import classes from './Input.module.css';
+import type { InputProps } from './@types/Input.types';
 
-import type React from 'react';
-
-interface Props extends React.ComponentProps<'input'> {
-  isInvalid?: boolean;
+export function Input({ className, isInvalid, ...rest }: InputProps) {
+  return <InputStyles className={`${className} ${isInvalid ? 'isInvalid' : ''}`} {...rest} />;
 }
-
-function Input({ className, isInvalid, ...rest }: Props) {
-  return <input className={clsx(className, classes.root, { [classes.invalid]: isInvalid })} {...rest} />;
-}
-
-export default Input;

@@ -2,35 +2,43 @@ import { useState } from 'react';
 
 import { Styles } from './InputPassword.styles';
 
-import Input from 'atoms/Input/Input';
+import { Input } from 'atoms/Input';
 
-export type InputType = 'text' | 'password' | 'email' | 'url' | 'new-password';
+import type { InputPasswordProps } from './@types/InputPassword.types';
 
-type Props = {
-  type?: InputType;
-};
-
-export const InputPassword = ({ type }: Props) => {
+export const InputPassword = ({ type = 'password' }: InputPasswordProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = () => setIsPasswordVisible(prev => !prev);
+  const togglePasswordVisibility = (event: any) => {
+    event.preventDefault();
+
+    setIsPasswordVisible(prev => !prev);
+  };
 
   const getType = () => {
-    if (type === 'password') {
-      return isPasswordVisible ? 'text' : 'password';
-    }
+    if (type === 'password') return isPasswordVisible ? 'text' : 'password';
 
-    return type;
+    return 'text';
+  };
+
+  const renderActionButton = () => {
+    switch (type) {
+      case 'password':
+        return (
+          <Styles.TogglePassword className="glass" onClick={togglePasswordVisibility}>
+            SHOW
+          </Styles.TogglePassword>
+        );
+
+      default:
+        return null;
+    }
   };
 
   return (
     <Styles.Container>
-      <Input />
-      {type === 'password' ? (
-        <Styles.TogglePassword color="light" onClick={togglePasswordVisibility}>
-          SHOW
-        </Styles.TogglePassword>
-      ) : null}
+      <Input type={getType()} />
+      {renderActionButton()}
     </Styles.Container>
   );
 };

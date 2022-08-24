@@ -62,6 +62,7 @@ const ToastBarBase = styled('div')<{ isVisible: boolean }>`
   line-height: 1.3;
   max-width: 350px;
   padding: 8px 10px;
+  margin: 2rem;
   pointer-events: auto;
   will-change: transform;
   animation: ${({ isVisible }) => (isVisible ? enter : exit)};
