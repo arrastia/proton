@@ -1,4 +1,6 @@
-import { atomFamily, selectorFamily } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+
+import { validate } from 'utils/PasswordUtils/validatePassword';
 
 import type { Password } from 'models';
 
@@ -7,6 +9,14 @@ type PasswordElement = Pick<Password, 'description' | 'name' | 'username' | 'val
 export const passwordElementState = atomFamily<string, `${keyof PasswordElement}_${string}`>({
   key: 'passwordElementState',
   default: ''
+});
+
+export const passwordValidationErrorsState = selectorFamily({
+  key: 'passwordValidationErrorsState',
+  get:
+    (id: `${keyof PasswordElement}_${string}`) =>
+    ({ get }) =>
+      validate(get(passwordElementState(id))).errors
 });
 
 export const passwordStore = selectorFamily<Password, string>({
@@ -19,6 +29,16 @@ export const passwordStore = selectorFamily<Password, string>({
       const username = get(passwordElementState(`username_${id}`));
       const value = get(passwordElementState(`value_${id}`));
 
-      return { createdAt: Date.now(), description, id, lastModifiedAt: Date.now(), name: title, url: [], username, value };
+      return {
+        createdAt: Date.now(),
+        description,
+        id,
+        lastModifiedAt: Date.now(),
+        name: title,
+        url: [],
+        username,
+        value,
+        isVulnerable: false
+      };
     }
 });

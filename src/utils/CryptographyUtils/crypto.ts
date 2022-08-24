@@ -1,4 +1,5 @@
-const iv = window.crypto.getRandomValues(new Uint8Array(12));
+// const iv = window.crypto.getRandomValues(new Uint8Array(12));
+const iv = new Uint8Array(12);
 
 function getMessageEncoding(message: string) {
   const enc = new TextEncoder();
@@ -6,7 +7,7 @@ function getMessageEncoding(message: string) {
   return enc.encode(message);
 }
 
-export async function encryptMessage(key: CryptoKey, message: string) {
+export async function encryptMessage(key: CryptoKey, message: string): Promise<ArrayBuffer> {
   // const iv = window.crypto.getRandomValues(new Uint8Array(12));
   const encoded = getMessageEncoding(message);
 
