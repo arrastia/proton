@@ -9,7 +9,6 @@ import { arrayBufferToBase64, encrypt, getDerivation, getKey } from 'utils/crypt
 import { decryptMessage, encryptMessage } from 'utils/CryptographyUtils/crypto';
 
 import type { FormEvent } from 'react';
-import { UserService } from 'core/services/User';
 
 export const Login = () => {
   const { handleLogin } = useAuth();
@@ -22,9 +21,6 @@ export const Login = () => {
 
     const parsedPass = arrayBufferToBase64(await getDerivation(password));
 
-    const test = await UserService.verifyMainPassword();
-
-    console.log('test :>> ', test);
     await handleLogin(password);
   };
 
