@@ -34,7 +34,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
         <Logo />
         <div className={styles.actionButtons}>
           <Button onClick={() => setIsVisible(true)}>New Password</Button>
-          <Button onClick={handleLogout}>Log out</Button>
+          <Button appearance="secondary" onClick={handleLogout}>
+            Log out
+          </Button>
         </div>
       </header>
 

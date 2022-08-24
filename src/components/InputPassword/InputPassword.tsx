@@ -4,10 +4,21 @@ import { Styles } from './InputPassword.styles';
 
 import { Input } from 'atoms/Input';
 
+import { generatePassword } from 'utils/PasswordUtils/generatePassword';
+
 import type { InputPasswordProps } from './@types/InputPassword.types';
 
-export const InputPassword = ({ type = 'password', ...rest }: InputPasswordProps) => {
+export const InputPassword = ({ onFocus, type = 'password', value, ...rest }: InputPasswordProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [strongPassword, setStrongPassword] = useState('');
+
+  const handleFocus = (event: any) => {
+    onFocus?.(event);
+
+    setStrongPassword('');
+  };
+
+  const handlePasswordGenerator = () => setStrongPassword(generatePassword());
 
   const togglePasswordVisibility = (event: any) => {
     event.preventDefault();
@@ -24,11 +35,10 @@ export const InputPassword = ({ type = 'password', ...rest }: InputPasswordProps
   const renderActionButton = () => {
     switch (type) {
       case 'password':
-        return (
-          <Styles.TogglePassword className="glass" onClick={togglePasswordVisibility}>
-            SHOW
-          </Styles.TogglePassword>
-        );
+        return <Styles.TogglePassword onClick={togglePasswordVisibility}>SHOW</Styles.TogglePassword>;
+
+      case 'new-password':
+        return <Styles.TogglePassword onClick={handlePasswordGenerator}>G</Styles.TogglePassword>;
 
       default:
         return null;
@@ -37,7 +47,7 @@ export const InputPassword = ({ type = 'password', ...rest }: InputPasswordProps
 
   return (
     <Styles.Container>
-      <Input type={getType()} {...rest} />
+      <Input onFocus={handleFocus} type={getType()} value={strongPassword || value} {...rest} />
       {renderActionButton()}
     </Styles.Container>
   );

@@ -19,7 +19,7 @@ export const PassList = ({ name, username, id, lastModifiedAt }: Props) => {
   return (
     <List id={id}>
       <ListItem isSelected={isSelected} onClick={() => setSelectedPassword(id)}>
-        <PasswordThumbnail name={name} lastModifiedAt={lastModifiedAt} />
+        <PasswordThumbnail lastModifiedAt={lastModifiedAt} name={name} />
       </ListItem>
     </List>
   );

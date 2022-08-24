@@ -19,7 +19,7 @@ export const Modal = ({ children, isFooterVisible, isVisible, onClose, title }: 
     isVisible ? onEnter() : onLeave();
   }, [isVisible]);
 
-  const onAnimationEnd = () => (animationStatus === 'leave' ? setIsDialogMounted(false) : modalRef.current?.focus());
+  const onAnimationEnd = () => (animationStatus === 'leave' ? setIsDialogMounted(false) : null);
 
   const onEnter = () => {
     setIsDialogMounted(true);

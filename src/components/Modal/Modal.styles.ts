@@ -106,15 +106,15 @@ const Dialog = styled('div')<{ animationStatus: 'enter' | 'leave' }>`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.21), 0 6px 6px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: fit-content;
   left: 0;
   margin: auto;
   /* padding: 2.5rem; */
   position: absolute;
   right: 0;
   top: 0;
-  /* max-width: 1080px; */
-  width: 500px;
+  min-width: 500px;
+  width: fit-content;
   z-index: 101;
   background: white;
   backdrop-filter: blur(100px);

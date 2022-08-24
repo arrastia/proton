@@ -1,8 +1,7 @@
 import { memo } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import clsx from 'clsx';
-
-import { useRecoilState, useRecoilValue } from 'recoil';
 
 import classes from './URLList.module.css';
 
@@ -10,10 +9,9 @@ import Icon from 'atoms/Icon';
 import { List } from 'atoms/List';
 import ListItem from 'atoms/ListItem';
 
-import { passwordsState } from 'stores/PasswordStore';
+import { urlStore } from 'stores/UrlStore';
 
 import type { Url } from 'models/Url';
-import { urlStore } from 'stores/UrlStore';
 
 interface URLListProps {
   onDelete: (id: string) => void;
@@ -31,7 +29,7 @@ export const URLList = memo(({ urls, onDelete, id }: URLListProps) => {
     <List className={classes.urlList}>
       {urlss.map(({ id, link }) => (
         <ListItem className={classes.urlListItem} dense key={id}>
-          <input autoFocus value={link} />
+          <input value={link} />
           <Icon className="fas fa-times" onClick={() => id} size="small" />
         </ListItem>
       ))}

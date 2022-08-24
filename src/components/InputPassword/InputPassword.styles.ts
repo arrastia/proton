@@ -11,6 +11,7 @@ const Container = styled('div')`
 const TogglePassword = styled(ButtonStyles)`
   position: absolute;
   right: 0.5rem;
+  color: ${({ theme: { colors } }) => colors.primary};
 `;
 
 export const Styles = { Container, TogglePassword };
