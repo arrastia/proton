@@ -4,24 +4,24 @@ import type { ButtonAppearance } from './@types/Button.types';
 
 export const ButtonStyles = styled('button')<{ appearance?: ButtonAppearance }>`
   align-items: center;
-  border-radius: 10px;
-  border: 1px solid var(--proton-blue);
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  font-size: 14px;
+  font-size: 1rem;
   justify-content: space-around;
   margin: 0;
   opacity: 0.85;
   overflow: visible;
-  padding: 0.5rem;
+  padding: 0.65rem;
   position: relative;
   text-align: center;
   text-decoration: none;
   transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s ease-out;
   user-select: none;
 
-  /* font-weight: bolder; */
+  font-weight: bolder;
 
   -moz-border-radius: 10px;
   -moz-transition: background-color 0.2s, box-shadow 0.2s;
@@ -55,7 +55,7 @@ export const ButtonStyles = styled('button')<{ appearance?: ButtonAppearance }>`
   }
 
   &.primary {
-    background: var(--proton-blue);
+    background: ${({ theme: { colors } }) => colors.primary};
     color: var(--white);
   }
 

@@ -1,11 +1,9 @@
-import clsx from 'clsx';
+import { TextareaStyles } from './Textarea.styles';
 
-import classes from './Textarea.module.css';
+import type { ComponentPropsWithoutRef } from 'react';
 
-import type { ComponentProps } from 'react';
-
-export interface TextareaProps extends ComponentProps<'textarea'> {}
+export interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {}
 
 export function Textarea({ className, ...rest }: TextareaProps) {
-  return <textarea className={clsx(className, classes.root)} {...rest} />;
+  return <TextareaStyles className={className} {...rest} rows={10} />;
 }

@@ -4,13 +4,13 @@ import { shake } from 'styles/animations/shake';
 
 export const InputStyles = styled('input')<{ isInvalid?: boolean }>`
   background-color: white;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid var(--gray);
-  font-size: 1.2rem;
+  font-size: 1rem;
   /* font-size: 14px; */
   opacity: 0.8;
   outline: none;
-  padding-right: 3rem;
+  /* padding-right: 3rem; */
   padding: 0.75rem 1rem;
   width: 100%;
 
