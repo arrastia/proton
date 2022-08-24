@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
+
+import * as storage from 'storage';
 
 import { CRYPTO_KEY_STORAGE_KEY } from 'configuration/constants/storage';
 import { MAIN_PASSWORD_VALIDATION } from 'configuration/constants/mainPassword';
@@ -8,7 +10,6 @@ import { routes } from 'configuration/routes';
 
 import { toasting } from 'components/Toast/toasting';
 
-import * as storage from 'storage';
 import { tokenState } from 'stores/UserStore';
 
 import { arrayBufferToBase64, getDerivation } from 'utils/crypto';
@@ -20,10 +21,13 @@ import type { Location } from 'react-router-dom';
 interface LocationFrom extends Location {
   state: { pathname: string };
 }
-const notify = () => toasting.error('Here is your toast.');
+
+const notify = () => toasting.error('Wrong password, try again.');
 
 export const useAuth = () => {
   const setToken = useSetRecoilState(tokenState);
+
+  const [loadingStatus, setLoadingStatus] = useState<'idle' | 'pending' | 'success' | 'failed'>('idle');
 
   const navigate = useNavigate();
   const { state } = useLocation() as LocationFrom;
@@ -35,17 +39,21 @@ export const useAuth = () => {
   }, [setToken]);
 
   const handleLogin = async (password: string) => {
-    await wait(500);
+    setLoadingStatus('pending');
+    await wait(5000);
 
     const derivation = await getDerivation(password);
     const rawPassword = arrayBufferToBase64(derivation);
 
     if (rawPassword === MAIN_PASSWORD_VALIDATION) {
       setToken(rawPassword);
+      setLoadingStatus('success');
       navigate(state?.pathname || routes.HOME, { replace: true });
+
       storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
     } else {
       notify();
+      setLoadingStatus('failed');
     }
   };
 
@@ -54,5 +62,5 @@ export const useAuth = () => {
     storage.removeItem(CRYPTO_KEY_STORAGE_KEY);
   };
 
-  return { handleLogin, handleLogout };
+  return { handleLogin, handleLogout, loadingStatus };
 };

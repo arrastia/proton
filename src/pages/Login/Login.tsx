@@ -1,17 +1,16 @@
-import classes from './Login.module.css';
+import { Monkey } from 'react-animated-stickers';
+
+import { Styles } from './Login.styles';
 
 import { Button } from 'atoms/Button/Button';
-import Input from 'atoms/Input';
+import { InputPassword } from 'components/InputPassword';
 
 import { useAuth } from 'hooks/useAuth/useAuth';
-
-import { arrayBufferToBase64, encrypt, getDerivation, getKey } from 'utils/crypto';
-import { decryptMessage, encryptMessage } from 'utils/CryptographyUtils/crypto';
 
 import type { FormEvent } from 'react';
 
 export const Login = () => {
-  const { handleLogin } = useAuth();
+  const { handleLogin, loadingStatus } = useAuth();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,125 +18,21 @@ export const Login = () => {
     const formData = new FormData(event.currentTarget);
     const password = formData.get('password') as string;
 
-    const parsedPass = arrayBufferToBase64(await getDerivation(password));
-
     await handleLogin(password);
   };
 
   return (
-    <form className={classes.form} onSubmit={onSubmit}>
-      <h1>Enter your master password</h1>
-      <label htmlFor="password-input">Password</label>
-      <Input id="password-input" name="password" placeholder="***********" type="password" />
-      <Button type="submit">Submit</Button>
-    </form>
+    <Styles.Container>
+      <Monkey />
+
+      <Styles.Form onSubmit={onSubmit}>
+        <h1>Enter your master password</h1>
+        <label htmlFor="password-input">Password</label>
+        <InputPassword id="password-input" name="password" placeholder="***********" type="password" />
+        <Button disabled={loadingStatus === 'pending'} type="submit">
+          {loadingStatus === 'pending' ? 'loading' : 'submit'}
+        </Button>
+      </Styles.Form>
+    </Styles.Container>
   );
 };
-
-// import { useState } from 'react';
-// import { useSetRecoilState } from 'recoil';
-
-// import classes from './Login.module.css';
-
-// import { CRYPTO_KEY_STORAGE_KEY, encryptedValidation, PASSWORDS_STORAGE_KEY } from '../../constants';
-
-// import { Button } from 'atoms/Button';
-// import Input from 'atoms/Input';
-// import Layout from 'components/Layout';
-
-// import { tokenState } from 'stores/UserStore';
-
-// import { wait } from 'helpers';
-
-// import * as storage from 'storage';
-
-// import { arrayBufferToBase64, decrypt, encrypt, getDerivation, getKey } from 'utils/crypto';
-
-// import type { ChangeEvent, FormEvent, ReactNode } from 'react';
-
-// type LoadingStatus = 'idle' | 'pending' | 'success' | 'failed';
-
-// export const Login = () => {
-//   const setToken = useSetRecoilState(tokenState);
-
-//   const [input, setInput] = useState('');
-//   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle');
-
-//   const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setInput(value);
-
-//   const handleSubmit = (event: FormEvent) => {
-//     event.preventDefault();
-
-//     if (loadingStatus === 'pending') return;
-
-//     const validate = async () => {
-//       const derivation = await getDerivation(input);
-//       const key = await getKey(derivation);
-
-//       await wait(500);
-//       // await decrypt(key, encryptedValidation);
-
-//       handleSuccess(key);
-//       storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
-//     };
-
-//     setLoadingStatus('success');
-//     validate().catch(() => setLoadingStatus('failed'));
-//   };
-
-//   const handleSuccess = (newKey: CryptoKey) => {
-//     const run = async () => {
-//       try {
-//         await hydratePasswords(newKey);
-//         setLoadingStatus('success');
-//       } catch (error) {
-//         return;
-//       }
-//     };
-
-//     setLoadingStatus('pending');
-//     run().catch(() => setLoadingStatus('failed'));
-//   };
-
-//   const hydratePasswords = async (newKey: CryptoKey) => {
-//     // setKey(newKey);
-//     setToken(newKey);
-
-//     await wait(500);
-//     const encryptedPasswords = JSON.parse(storage.getItem(PASSWORDS_STORAGE_KEY));
-//     // const encryptedPasswordsSTConst = JSON.parse(encryptedPasswordsST);
-
-//     if (!encryptedPasswords) {
-//       return;
-//     }
-
-//     // const decryptedPasswords = JSON.parse(await decrypt(newKey, encryptedPasswords));
-//     // setDecryptedPasswords(decryptedPasswords);
-//   };
-
-//   const test = async () => {
-//     const derivation = await getDerivation(input);
-//     const key = await getKey(derivation);
-
-//     await wait(500);
-
-//     const encryptedText = await encrypt(key, 'hola');
-//     console.log('encryptedText :>> ', encryptedText);
-//     // const decryptedText = await decrypt(key, encryptedText);
-
-//     // console.log('decryptedText', decryptedText);
-//   };
-
-//   return (
-//     // <div className={classes.container}>
-//     <form className={classes.form} onSubmit={handleSubmit}>
-//       <h1>Enter your master password</h1>
-//       <label htmlFor="password-input">Password</label>
-//       <Input id="password-input" onChange={handleChange} placeholder="***********" type="password" value={input} />
-//       <Button disabled={loadingStatus === 'pending'} onClick={test}>
-//         Submit
-//       </Button>
-//     </form>
-//     // </div>
-//   );
-// };
