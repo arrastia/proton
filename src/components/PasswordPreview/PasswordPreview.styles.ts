@@ -13,4 +13,10 @@ const PreviewHeader = styled('div')`
   gap: 0.5rem;
 `;
 
-export const Styles = { Container, PreviewHeader };
+const Group = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const Styles = { Container, PreviewHeader, Group };

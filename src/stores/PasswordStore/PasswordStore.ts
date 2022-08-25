@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 
 import { passwordStore } from 'stores/PasswordElementState';
 
@@ -10,17 +10,12 @@ export const allPasswordsState = atom<Password[]>({
   key: 'allPasswordsState',
   default: [],
   effects: [
-    ({ setSelf, onSet, trigger }) => {
+    ({ onSet, setSelf, trigger }) => {
       if (trigger === 'get') loadPersisted(setSelf);
 
       onSet(setValues);
     }
   ]
-});
-
-export const passwordsState = atomFamily<Password, string>({
-  key: 'passwordsState',
-  default: () => ({ createdAt: Date.now(), description: '', id: '', lastModifiedAt: Date.now(), name: '', url: [], username: '', value: '' })
 });
 
 export const selectedPasswordIdState = atom<string>({

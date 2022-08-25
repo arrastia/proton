@@ -1,1 +1,1 @@
-export { allPasswordsState, isSelectedState, passwordsState, selectedElementState, selectedPasswordIdState } from './PasswordStore';
+export { allPasswordsState, isSelectedState, selectedElementState, selectedPasswordIdState } from './PasswordStore';

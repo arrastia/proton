@@ -1,9 +1,9 @@
 import { useGetRecoilValueInfo_UNSTABLE, useSetRecoilState } from 'recoil';
 
-import classes from './Form.module.css';
+import { Styles } from './Form.styles';
 
 import { Button } from 'atoms/Button/Button';
-import Divider from 'components/Divider';
+import { Divider } from 'components/Divider';
 import URLs from 'components/URLs';
 
 import { usePasswords } from 'components/Header/usePasswords';
@@ -46,22 +46,24 @@ export const Form = ({ editId, onCancel, onDelete, onSave }: FormProps) => {
   };
 
   return (
-    <div className={classes.editingPanel}>
+    <Styles.Form>
       <PasswordName id={id} />
       <Divider />
-      <Username element="username" id={id} />
-      <PasswordValue id={id} />
+      <Styles.Group>
+        <Username id={id} />
+        <PasswordValue id={id} />
+      </Styles.Group>
       <Divider />
       <URLs id={id} />
       <Divider />
       <PasswordDescription id={id} />
-      <div className={`row ${classes.actionButtons}`}>
+      <Styles.ActionButtons>
         {editId ? <Button onClick={onDelete}>Delete</Button> : null}
         <div className="row">
           <Button onClick={onCancel}>Cancel</Button>
           <Button onClick={handleSavePassword}>Save</Button>
         </div>
-      </div>
-    </div>
+      </Styles.ActionButtons>
+    </Styles.Form>
   );
 };
