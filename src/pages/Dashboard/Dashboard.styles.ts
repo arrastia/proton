@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const View = styled('section')`
-  padding: 1.5rem;
+  padding: 0.5rem;
   width: 100%;
-  margin: 0 1rem;
+  margin: 0.5rem;
   flex: 1;
 `;
 

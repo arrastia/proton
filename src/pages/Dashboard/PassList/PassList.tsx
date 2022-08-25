@@ -1,14 +1,16 @@
-import { List } from 'atoms/List';
-import ListItem from 'atoms/ListItem';
-import { PasswordThumbnail } from 'components/PasswordThumbnail';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import { List } from 'atoms/List';
+import { PasswordThumbnail } from 'components/PasswordThumbnail';
+import ListItem from 'atoms/ListItem';
+
 import { isSelectedState, selectedPasswordIdState } from 'stores/PasswordStore';
 
 type Props = {
   id: string;
+  lastModifiedAt: number;
   name: string;
   username: string;
-  lastModifiedAt: number;
 };
 
 export const PassList = ({ name, username, id, lastModifiedAt }: Props) => {

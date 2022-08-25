@@ -7,7 +7,8 @@ import { InputPassword } from 'components/InputPassword';
 
 import { useAuth } from 'hooks/useAuth/useAuth';
 
-import type { FormEvent } from 'react';
+import { FormEvent, Fragment } from 'react';
+import { ProtonProducts } from 'components/ProtonProducts';
 
 export const Login = () => {
   const { handleLogin, loadingStatus } = useAuth();
@@ -22,17 +23,20 @@ export const Login = () => {
   };
 
   return (
-    <Styles.Container>
-      <Monkey />
+    <Fragment>
+      <Styles.Container>
+        <Monkey />
 
-      <Styles.Form onSubmit={onSubmit}>
-        <h1>Enter your master password</h1>
-        <label htmlFor="password-input">Password</label>
-        <InputPassword id="password-input" name="password" placeholder="***********" type="password" />
-        <Button disabled={loadingStatus === 'pending'} type="submit">
-          {loadingStatus === 'pending' ? 'loading' : 'submit'}
-        </Button>
-      </Styles.Form>
-    </Styles.Container>
+        <Styles.Form onSubmit={onSubmit}>
+          <h1>Enter your master password</h1>
+          <label htmlFor="password-input">Password</label>
+          <InputPassword id="password-input" name="password" placeholder="***********" type="password" />
+          <Button disabled={loadingStatus === 'pending'} type="submit">
+            {loadingStatus === 'pending' ? 'loading' : 'submit'}
+          </Button>
+        </Styles.Form>
+      </Styles.Container>
+      <ProtonProducts />
+    </Fragment>
   );
 };
