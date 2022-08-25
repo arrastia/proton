@@ -1,10 +1,9 @@
+const alphabetLower = 'abcdefghijklmnopqrstuvwxyz';
+const alphabetUpper = alphabetLower.toUpperCase();
+const digits = '0123456789';
+const symbols = '!@#%*()_+-={}|[]:";<>?,./';
+
 export function generatePassword(length: number = 20): string {
-  const alphabetLower = 'abcdefghijklmnopqrstuvwxyz';
-  const alphabetUpper = alphabetLower.toUpperCase();
-
-  const digits = '0123456789';
-  const symbols = '`~!@#$%^&*()_+-={}|[]:";\'<>?,./';
-
   let password: string = '';
 
   const seeds: string = alphabetLower + alphabetUpper + digits + symbols;
