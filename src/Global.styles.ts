@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { background } from 'assets/images';
+
 export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
     * { 
       box-sizing: border-box;
@@ -10,7 +12,7 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
     body {
       align-items: center;
       display: flex;
-      background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--white)' : 'var(--proton-blue)')};
+      background-image: url(${background});
       flex-direction: column;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
       height: 100vh;
@@ -37,13 +39,15 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
       text-align: left;
     }
 
-    p {
+    /* p {
       font-size: 13px;
       font-weight: 400;
       letter-spacing: -0.01em;
       line-height: 18px;
       text-align: left;
-    }
+    } */
 `;
 
 /* background: ${({ theme: { gradients }, isAuthenticated }) => (isAuthenticated ? 'var(--white)' : gradients.mail.gradient)}; */
+
+// background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--white)' : 'var(--proton-blue)')};
