@@ -2,11 +2,14 @@ import { useState } from 'react';
 
 import { Styles } from './InputPassword.styles';
 
+import { eye } from 'assets/lotties';
+
 import { Input } from 'atoms/Input';
 
 import { generatePassword } from 'utils/PasswordUtils/generatePassword';
 
 import type { InputPasswordProps } from './@types/InputPassword.types';
+import { VisibilityIcon } from './components/VisibilityIcon';
 
 export const InputPassword = ({ onFocus, type = 'password', value, ...rest }: InputPasswordProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -35,7 +38,14 @@ export const InputPassword = ({ onFocus, type = 'password', value, ...rest }: In
   const renderActionButton = () => {
     switch (type) {
       case 'password':
-        return <Styles.TogglePassword onClick={togglePasswordVisibility}>SHOW</Styles.TogglePassword>;
+        return (
+          <VisibilityIcon
+            // animation={{ animationData: eye, animationKey: 'visibility' }}
+            onClick={togglePasswordVisibility}
+            // reverse={isPasswordVisible}
+            size={40}
+          />
+        );
 
       case 'new-password':
         return <Styles.TogglePassword onClick={handlePasswordGenerator}>G</Styles.TogglePassword>;
