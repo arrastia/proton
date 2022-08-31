@@ -4,4 +4,5 @@ export type ButtonAppearance = 'primary' | 'secondary' | 'default' | 'light' | '
 
 export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   appearance?: ButtonAppearance;
+  isLoading?: boolean;
 }
