@@ -3,10 +3,6 @@ import styled from 'styled-components';
 const Container = styled('div')`
   align-items: center;
   align-self: center;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-
   backdrop-filter: saturate(180%) blur(20px);
   background-color: rgb(255 255 255 / 31%);
   border-radius: ${({ theme: { borderRadius } }) => borderRadius};
@@ -20,14 +16,12 @@ const Container = styled('div')`
   max-height: max-content;
   max-width: 1080px;
   overflow: hidden;
+  padding: 3rem;
   position: relative;
   transition: all 300ms ease-in-out;
   user-select: none;
   width: fit-content;
-
   -webkit-backdrop-filter: blur(20px);
-
-  padding: 3rem;
 `;
 
 const Form = styled('form')`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Thumbnail = styled('div')`
-  background-color: paleturquoise;
+  background: linear-gradient(122.32deg, #6d4aff 30.66%, #31d1d0 93.8%);
   border-radius: 10px;
   height: 4rem;
   width: 4rem;

@@ -32,8 +32,7 @@ export const Login = () => {
 
         <Styles.Form onSubmit={onSubmit}>
           <h1>{messages['enterPassword']}</h1>
-          <label htmlFor="password-input">{messages['password']}</label>
-          <InputPassword id="password-input" name="password" placeholder="***********" type="password" />
+          <InputPassword name="password" placeholder={messages['password']} readOnly={loadingStatus === 'pending'} type="password" />
           <Button disabled={loadingStatus === 'pending'} isLoading={loadingStatus === 'pending'} type="submit">
             {messages['signIn']}
           </Button>

@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 
 import lottie from 'lottie-web';
 
+import { Styles } from './VisibilityIcon.styles';
+
 import { eye } from 'assets/lotties';
 
 import type { AnimationDirection, AnimationItem } from 'lottie-web';
-import type { CSSProperties, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import type { VisibilityIconProps } from './@types/VisibilityIcon.types';
 
 export const VisibilityIcon = ({ onClick, size }: VisibilityIconProps) => {
@@ -13,8 +15,6 @@ export const VisibilityIcon = ({ onClick, size }: VisibilityIconProps) => {
   const [direction, setDirection] = useState<AnimationDirection>(1);
 
   const ref = useRef<HTMLDivElement>(null);
-
-  const defaultStyles: CSSProperties = { height: `${size}px`, outline: 'none', overflow: 'hidden', width: `${size}px` };
 
   useEffect(() => {
     const instance = lottie.loadAnimation({
@@ -41,5 +41,5 @@ export const VisibilityIcon = ({ onClick, size }: VisibilityIconProps) => {
     setDirection(prevDirection => (prevDirection === 1 ? -1 : 1));
   };
 
-  return <div onClick={handleOnClick} ref={ref} style={defaultStyles} />;
+  return <Styles.Icon onClick={handleOnClick} ref={ref} size={size} />;
 };

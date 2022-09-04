@@ -28,7 +28,7 @@ export const PasswordPreview = () => {
           <Banner
             message={`You are reusing the password of ${password.url} which increases the risk to this account if your "${password.url}" account is compromised`}
             title="Reused password"
-            url={password.url?.[0].link}
+            url={password.url?.[0]?.link}
           />
           <Divider />
         </Fragment>
