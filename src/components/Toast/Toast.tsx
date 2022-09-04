@@ -4,11 +4,11 @@ import { Styles } from './Toast.styles';
 
 import ToastBar from './components/ToastBar';
 
-import { useToast } from './hooks/useToast';
+import { useToast } from 'hooks/useToast';
 
 import { createRectRef } from './utils/createRectRef';
 import { getPositionStyle } from './utils/getPositionStyle';
-import { resolveValue } from './utils/resolveValue';
+import { resolveValue } from 'utils/NotificationUtils';
 
 import type { CSSProperties } from 'react';
 import type { ToastProps } from './@types/Toast.types';

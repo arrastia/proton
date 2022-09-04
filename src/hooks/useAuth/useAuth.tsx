@@ -4,11 +4,11 @@ import { useSetRecoilState } from 'recoil';
 
 import * as storage from 'storage';
 
-import { CRYPTO_KEY_STORAGE_KEY } from 'configuration/constants/storage';
-import { MAIN_PASSWORD_VALIDATION } from 'configuration/constants/mainPassword';
+import { CRYPTO_KEY_STORAGE_KEY, MAIN_PASSWORD_VALIDATION } from 'configuration/constants';
 import { routes } from 'configuration/routes';
 
-import { toasting } from 'components/Toast/toasting';
+import { useLocale } from 'hooks/useLocale';
+import { useNotify } from 'hooks/useNotify';
 
 import { tokenState } from 'stores/UserStore';
 
@@ -16,21 +16,20 @@ import { arrayBufferToBase64, getDerivation } from 'utils/crypto';
 
 import { wait } from 'helpers';
 
-import type { Location } from 'react-router-dom';
-
-interface LocationFrom extends Location {
-  state: { pathname: string };
-}
-
-const notify = () => toasting.error('Wrong password, try again.');
+import type { LoadingStatus, LocationFrom } from './@types/useAuth.types';
 
 export const useAuth = () => {
   const setToken = useSetRecoilState(tokenState);
 
-  const [loadingStatus, setLoadingStatus] = useState<'idle' | 'pending' | 'success' | 'failed'>('idle');
-
   const navigate = useNavigate();
-  const { state } = useLocation() as LocationFrom;
+  const location = useLocation();
+
+  const { state } = location as LocationFrom;
+
+  const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle');
+
+  const { error } = useNotify();
+  const { messages } = useLocale<'LOGIN'>({ page: 'LOGIN' });
 
   useEffect(() => {
     const rawCryptoKey = storage.getItem<string>(CRYPTO_KEY_STORAGE_KEY);
@@ -52,7 +51,7 @@ export const useAuth = () => {
 
       storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
     } else {
-      notify();
+      error(messages['wrongPasswordNotification']);
       setLoadingStatus('failed');
     }
   };

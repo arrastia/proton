@@ -42,7 +42,7 @@ export const toastReducer = (state = initialFormState, { payload, type }: ToastA
 
       return { ...state, toasts: state.toasts.map(t => (t.id === payload.toast.id ? { ...t, ...payload.toast } : t)) };
 
-    case 'UPSERT_TOAST':
+    case 'HANDLE_TOAST':
       const { toast } = payload;
       const existingToast = state.toasts.find(t => t.id === toast.id);
 

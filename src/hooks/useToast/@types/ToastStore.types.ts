@@ -15,5 +15,5 @@ export interface ToastPayload {
   REMOVE_TOAST: { toastId?: string };
   START_PAUSE: { time: number };
   UPDATE_TOAST: { toast: Partial<Toast> };
-  UPSERT_TOAST: { toast: Toast };
+  HANDLE_TOAST: { toast: Toast };
 }

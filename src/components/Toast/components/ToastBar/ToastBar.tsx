@@ -5,7 +5,7 @@ import { Styles } from './ToastBar.styles';
 import ToastIcon from '../ToastIcon';
 
 import { getAnimationStyle } from 'components/Toast/utils/getAnimationStyle';
-import { resolveValue } from 'components/Toast/utils/resolveValue';
+import { resolveValue } from 'utils/NotificationUtils';
 
 import type { ToastBarProps } from './@types/ToastBar.types';
 import type { CSSProperties } from 'react';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { toastReducer } from './reducers/toastReducer';
 
-import type { DefaultToastOptions, ToastType } from '../../@types/Toast.types';
+import type { DefaultToastOptions, ToastType } from 'components/Toast';
 import type { ToastActions, ToastState } from './@types/ToastStore.types';
 
 type ToastTimeouts = { [key in ToastType]: number };

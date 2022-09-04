@@ -1,17 +1,16 @@
 import { useEffect, useMemo } from 'react';
 
-import { dispatch, useToastStore } from './useToastStore/useToastStore';
-import { toasting } from '../toasting';
+import { dispatch, useToastStore } from './useToastStore';
+import { useNotify } from 'hooks/useNotify';
 
-import type { DefaultToastOptions, Toast, ToastPosition } from '../@types/Toast.types';
+import type { DefaultToastOptions, Toast, ToastPosition } from 'components/Toast';
 
 export const useToast = (toastOptions: DefaultToastOptions) => {
+  const { dismiss } = useNotify();
   const { pausedAt, toasts } = useToastStore(toastOptions);
 
   useEffect(() => {
-    if (pausedAt) {
-      return;
-    }
+    if (pausedAt) return;
 
     const now = Date.now();
     const timeouts = toasts.map(t => {
@@ -21,11 +20,11 @@ export const useToast = (toastOptions: DefaultToastOptions) => {
 
       if (durationLeft < 0) {
         if (t.visible) {
-          toasting.dismiss(t.id);
+          dismiss(t.id);
         }
         return [];
       }
-      return setTimeout(() => toasting.dismiss(t.id), durationLeft);
+      return setTimeout(() => dismiss(t.id), durationLeft);
     });
 
     return () => {

@@ -14,6 +14,7 @@ interface LoginMessages {
   enterPassword: string;
   password: string;
   signIn: string;
+  wrongPasswordNotification: string;
 }
 
 interface DashboardMessages {

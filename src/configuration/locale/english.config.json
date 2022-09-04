@@ -14,6 +14,7 @@
   "LOGIN": {
     "enterPassword": "Enter your master password",
     "password": "Password",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "wrongPasswordNotification": "Wrong password, try again."
   }
 }

@@ -1,4 +1,4 @@
-import type { ValueFunction, ValueOrFunction } from '../@types/Toast.types';
+import type { ValueFunction, ValueOrFunction } from 'components/Toast';
 
 const isFunction = <TValue, TArg>(valOrFunction: ValueOrFunction<TValue, TArg>): valOrFunction is ValueFunction<TValue, TArg> =>
   typeof valOrFunction === 'function';
