@@ -9,7 +9,7 @@ const Container = styled('div')`
 
   backdrop-filter: saturate(180%) blur(20px);
   background-color: rgb(255 255 255 / 31%);
-  border-radius: 10px;
+  border-radius: ${({ theme: { borderRadius } }) => borderRadius};
   box-shadow: 0 10px 70px 1px rgba(0, 0, 0, 0.56);
   display: flex;
   flex-direction: column;
@@ -33,7 +33,6 @@ const Container = styled('div')`
 const Form = styled('form')`
   align-items: stretch;
   align-self: center;
-  border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -4,11 +4,7 @@ import lottie from 'lottie-web';
 
 import { loading } from 'assets/lotties';
 
-type Props = {
-  size?: number;
-};
-
-export const Spinner = ({ size }: Props) => {
+export const Spinner = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,5 +22,5 @@ export const Spinner = ({ size }: Props) => {
     };
   }, []);
 
-  return <div ref={ref} />;
+  return <div ref={ref} style={{ height: '20px' }} />;
 };

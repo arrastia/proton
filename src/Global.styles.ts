@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import { background } from 'assets/images';
 
-export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
+export const GlobalStyles = createGlobalStyle`
     * { 
       box-sizing: border-box;
       margin: 0;
@@ -11,8 +11,10 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
 
     body {
       align-items: center;
-      display: flex;
+      background-color: ${({ theme: { themeBasedColors } }) => themeBasedColors.background};
       background-image: url(${background});
+      color: ${({ theme: { themeBasedColors } }) => themeBasedColors.text};
+      display: flex;
       flex-direction: column;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
       height: 100vh;
@@ -25,7 +27,7 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
     }
 
     h1 {
-      color: #1a1a38;
+      color: ${({ theme: { themeBasedColors } }) => themeBasedColors.text};
       font-size: 1.5rem;
       line-height: 32px;
       margin: 0;
@@ -38,16 +40,4 @@ export const GlobalStyles = createGlobalStyle<{ isAuthenticated: boolean }>`
       line-height: 24px;
       text-align: left;
     }
-
-    /* p {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      line-height: 18px;
-      text-align: left;
-    } */
 `;
-
-/* background: ${({ theme: { gradients }, isAuthenticated }) => (isAuthenticated ? 'var(--white)' : gradients.mail.gradient)}; */
-
-// background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--white)' : 'var(--proton-blue)')};

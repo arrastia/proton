@@ -1,12 +1,14 @@
-import { colors } from './colors';
-import { calendarGradient, driveGradient, mailGradient, vpnGradient } from './gradients';
+import { base } from './base.theme';
 
-export const light = {
-  colors,
-  gradients: {
-    calendar: calendarGradient,
-    drive: driveGradient,
-    mail: mailGradient,
-    vpn: vpnGradient
-  }
+import type { ThemeBasedColors } from './colors';
+
+const colors: ThemeBasedColors = {
+  background: '#ffffff',
+  borderDefault: '#aaaaaa',
+  divider: '#dbdbe0',
+  glass: 'rgb(255 255 255 / 31%)',
+  text: '#545d68',
+  textBright: '#636e7b'
 };
+
+export const light = { ...base, themeBasedColors: colors };

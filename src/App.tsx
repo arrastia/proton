@@ -17,7 +17,7 @@ import NotFound from 'pages/NotFound';
 
 import { isDarkModeState, tokenState } from 'stores/UserStore';
 
-import { light } from 'styles/themes';
+import { dark, light } from 'styles/themes';
 
 const Layout = lazy(() => import('components/Layout'));
 
@@ -28,24 +28,23 @@ function App() {
   const renderRoutes = () => {
     if (!token) return <Route element={<Login />} path={routes.DASHBOARD} />;
 
-    return (
-      <Route
-        element={
-          <Suspense fallback={<SplashScreen />}>
-            <Layout />
-          </Suspense>
-        }
-      >
-        <Route element={<Dashboard />} path={routes.DASHBOARD} />
+    const renderLayout = () => (
+      <Suspense fallback={<SplashScreen />}>
+        <Layout />
+      </Suspense>
+    );
 
+    return (
+      <Route element={renderLayout()}>
+        <Route element={<Dashboard />} path={routes.DASHBOARD} />
         <Route element={<NotFound />} path={'*'} />
       </Route>
     );
   };
 
   return (
-    <ThemeProvider theme={{ ...light }}>
-      <GlobalStyles isAuthenticated={Boolean(token)} />
+    <ThemeProvider theme={{ ...(!isDarkMode ? light : dark) }}>
+      <GlobalStyles />
       <Toast toastOptions={{}} />
       <BrowserRouter>
         <Routes>{renderRoutes()}</Routes>

@@ -17,5 +17,5 @@ export const driveGradient: Gradient = {
 
 export const vpnGradient: Gradient = {
   color: 'rgb(36,236,198)',
-  gradient: 'linear-gradient(0deg, rgba(36,236,198,1) 0%, rgba(202,201,255,1) 100%)'
+  gradient: 'linear-gradient(122.32deg, #6d4aff 30.66%, #31d1d0 93.8%)'
 };

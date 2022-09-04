@@ -4,7 +4,7 @@ import type { ButtonAppearance } from './@types/Button.types';
 
 export const ButtonStyles = styled('button')<{ appearance?: ButtonAppearance }>`
   align-items: center;
-  border-radius: 5px;
+  border-radius: 7px;
   border: none;
   cursor: pointer;
   display: flex;
@@ -23,13 +23,13 @@ export const ButtonStyles = styled('button')<{ appearance?: ButtonAppearance }>`
 
   font-weight: bolder;
 
-  -moz-border-radius: 10px;
+  /* -moz-border-radius: 10px;
   -moz-transition: background-color 0.2s, box-shadow 0.2s;
   -moz-user-select: none;
   -o-transition: background-color 0.2s, box-shadow 0.2s;
   -webkit-border-radius: 10px;
   -webkit-transition: background-color 0.2s, box-shadow 0.2s;
-  -webkit-user-select: none;
+  -webkit-user-select: none; */
 
   &:active {
     transform: scale(0.98);
@@ -55,7 +55,7 @@ export const ButtonStyles = styled('button')<{ appearance?: ButtonAppearance }>`
   }
 
   &.primary {
-    background: ${({ theme: { colors } }) => colors.primary};
+    background: ${({ theme: { corporateColors } }) => corporateColors.purple};
     color: var(--white);
   }
 
