@@ -1,5 +1,16 @@
 {
-  "DASHBOARD": {},
+  "DASHBOARD": {
+    "cancel": "Cancel",
+    "editPasswordTitlePlaceholder": "📝 Edit passwords name",
+    "logOut": "Log out",
+    "newPassword": "New Password",
+    "notes": "Notes",
+    "password": "Password",
+    "save": "Save",
+    "selectAnAccountToViewDetails": "Select an account to view it's details",
+    "url": "URL",
+    "username": "Username"
+  },
   "LOGIN": {
     "enterPassword": "Enter your master password",
     "password": "Password",

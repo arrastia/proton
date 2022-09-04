@@ -1,20 +1,32 @@
-import type { messages } from 'configuration/locale';
-import type { routes } from 'configuration/routes';
+import type { Routes } from 'configuration/routes';
 
-// export type MessagesKeys = keyof messages;
-
-type ValueOf<T> = T[keyof T];
-
-type ActionMap<M extends { [index: string]: any }> = {
-  [Key in keyof M]: { key: Key; content: M[Key] };
+type LocaleMap<M extends { [key in Routes]: any }> = {
+  [Key in keyof M]: M[Key];
 };
 
-type MessagesKeys = {};
+export type Languages = 'en' | 'es' | 'eus';
 
-export interface LocaleItems {
-  LOGIN: { enterPassword: string; password: string; signIn: string };
+export type Locale = { DASHBOARD: DashboardMessages; LOGIN: LoginMessages };
+
+export type LocaleByPage<T extends Routes> = LocaleMap<Locale>[T];
+
+interface LoginMessages {
+  enterPassword: string;
+  password: string;
+  signIn: string;
 }
 
-export type Locale = ActionMap<LocaleItems>[keyof ActionMap<LocaleItems>];
+interface DashboardMessages {
+  cancel: string;
+  editPasswordTitlePlaceholder: string;
+  logOut: string;
+  newPassword: string;
+  notes: string;
+  password: string;
+  save: string;
+  selectAnAccountToViewDetails: string;
+  url: string;
+  username: string;
+}
 
-export type Pages = keyof typeof routes;
+// type ValueOf<T> = T[keyof T];
