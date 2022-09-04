@@ -17,6 +17,7 @@ import { PasswordName } from './components/PasswordName';
 import { PasswordValue } from './components/PasswordValue';
 import { PasswordDescription } from './components/PasswordDescription';
 import { Username } from './components/Username';
+import { useLocale } from 'hooks/useLocale';
 
 const createPassword = (id: string): Password => {
   return { createdAt: Date.now(), description: '', id, lastModifiedAt: Date.now(), name: '', url: [], username: '', value: '' };
@@ -24,6 +25,8 @@ const createPassword = (id: string): Password => {
 
 export const Form = ({ editId, onCancel, onDelete, onSave }: FormProps) => {
   const id = editId ? editId : createPassword(`${Date.now()}`).id;
+
+  const { messages } = useLocale<'DASHBOARD'>({ page: 'DASHBOARD' });
 
   const getInfo = useGetRecoilValueInfo_UNSTABLE();
 
@@ -60,8 +63,8 @@ export const Form = ({ editId, onCancel, onDelete, onSave }: FormProps) => {
       <Styles.ActionButtons>
         {editId ? <Button onClick={onDelete}>Delete</Button> : null}
         <div className="row">
-          <Button onClick={onCancel}>Cancel</Button>
-          <Button onClick={handleSavePassword}>Save</Button>
+          <Button onClick={onCancel}>{messages['cancel']}</Button>
+          <Button onClick={handleSavePassword}>{messages['save']}</Button>
         </div>
       </Styles.ActionButtons>
     </Styles.Form>

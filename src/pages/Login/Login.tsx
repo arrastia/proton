@@ -1,17 +1,20 @@
+import { Fragment } from 'react';
 import { Monkey } from 'react-animated-stickers';
 
 import { Styles } from './Login.styles';
 
-import { Button } from 'atoms/Button/Button';
+import { Button } from 'atoms/Button';
 import { InputPassword } from 'components/InputPassword';
+import { ProtonProducts } from 'components/ProtonProducts';
 
 import { useAuth } from 'hooks/useAuth/useAuth';
+import { useLocale } from 'hooks/useLocale';
 
-import { FormEvent, Fragment } from 'react';
-import { ProtonProducts } from 'components/ProtonProducts';
+import type { FormEvent } from 'react';
 
 export const Login = () => {
   const { handleLogin, loadingStatus } = useAuth();
+  const { messages } = useLocale<'LOGIN'>({ page: 'LOGIN' });
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,11 +31,11 @@ export const Login = () => {
         <Monkey />
 
         <Styles.Form onSubmit={onSubmit}>
-          <h1>Enter your master password</h1>
-          <label htmlFor="password-input">Password</label>
+          <h1>{messages['enterPassword']}</h1>
+          <label htmlFor="password-input">{messages['password']}</label>
           <InputPassword id="password-input" name="password" placeholder="***********" type="password" />
-          <Button disabled={loadingStatus === 'pending'} type="submit">
-            {loadingStatus === 'pending' ? 'loading' : 'submit'}
+          <Button disabled={loadingStatus === 'pending'} isLoading={loadingStatus === 'pending'} type="submit">
+            {messages['signIn']}
           </Button>
         </Styles.Form>
       </Styles.Container>

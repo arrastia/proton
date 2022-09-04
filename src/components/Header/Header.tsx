@@ -13,10 +13,13 @@ import { useAuth } from 'hooks/useAuth';
 import { isAttemptedState } from 'stores/FormStore';
 
 import type { ComponentPropsWithoutRef } from 'react';
+import { useLocale } from 'hooks/useLocale';
 
 export type HeaderProps = ComponentPropsWithoutRef<'header'>;
 
 export const Header = ({ className, ...rest }: HeaderProps) => {
+  const { messages } = useLocale<'DASHBOARD'>({ page: 'DASHBOARD' });
+
   const [isVisible, setIsVisible] = useState(false);
 
   const resetAttemptedState = useResetRecoilState(isAttemptedState);
@@ -33,9 +36,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
       <header className={`${styles.header} ${className}`} {...rest}>
         <Logo />
         <div className={styles.actionButtons}>
-          <Button onClick={() => setIsVisible(true)}>New Password</Button>
+          <Button onClick={() => setIsVisible(true)}>{messages['newPassword']}</Button>
           <Button appearance="secondary" onClick={handleLogout}>
-            Log out
+            {messages['logOut']}
           </Button>
         </div>
       </header>

@@ -1,7 +1,7 @@
-import React from 'react';
+import { useLocale } from 'hooks/useLocale';
 
-type Props = {};
+export const NoPasswordSelected = () => {
+  const { messages } = useLocale<'DASHBOARD'>({ page: 'DASHBOARD' });
 
-export const NoPasswordSelected = (props: Props) => {
-  return <p>Select an account to view its details</p>;
+  return <p>{messages['selectAnAccountToViewDetails']}</p>;
 };
