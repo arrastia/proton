@@ -26,7 +26,7 @@ function App() {
   const isDarkMode = useRecoilValue(isDarkModeState);
 
   const renderRoutes = () => {
-    if (!token) return <Route element={<Login />} path={routes.HOME} />;
+    if (!token) return <Route element={<Login />} path={routes.DASHBOARD} />;
 
     return (
       <Route
@@ -36,7 +36,7 @@ function App() {
           </Suspense>
         }
       >
-        <Route element={<Dashboard />} path={routes.HOME} />
+        <Route element={<Dashboard />} path={routes.DASHBOARD} />
 
         <Route element={<NotFound />} path={'*'} />
       </Route>

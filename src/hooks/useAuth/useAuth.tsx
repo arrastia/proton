@@ -48,7 +48,7 @@ export const useAuth = () => {
     if (rawPassword === MAIN_PASSWORD_VALIDATION) {
       setToken(rawPassword);
       setLoadingStatus('success');
-      navigate(state?.pathname || routes.HOME, { replace: true });
+      navigate(state?.pathname || routes.DASHBOARD, { replace: true });
 
       storage.setItem(CRYPTO_KEY_STORAGE_KEY, arrayBufferToBase64(derivation));
     } else {
