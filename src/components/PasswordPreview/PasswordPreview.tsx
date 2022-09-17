@@ -3,14 +3,14 @@ import { useRecoilValue } from 'recoil';
 
 import { Styles } from './PasswordPreview.styles';
 
+import { Banner } from 'components/Banner';
 import { Button } from 'atoms/Button/Button';
+import { Divider } from 'components/Divider';
+import { Form } from 'components/Form';
 import { Modal } from 'components/Modal';
 import { PasswordThumbnail } from 'components/PasswordThumbnail';
-import { Divider } from 'components/Divider';
-import Form from 'components/Form';
 
 import { selectedElementState } from 'stores/PasswordStore';
-import { Banner } from 'components/Banner';
 
 export const PasswordPreview = () => {
   const password = useRecoilValue(selectedElementState);
@@ -26,7 +26,7 @@ export const PasswordPreview = () => {
       return (
         <Fragment>
           <Banner
-            message={`You are reusing the password of ${password.url} which increases the risk to this account if your "${password.url}" account is compromised`}
+            message={`You are reusing the password of ${password.url?.[0]?.link} which increases the risk to this account if your "${password.url?.[0]?.link}" account is compromised`}
             title="Reused password"
             url={password.url?.[0]?.link}
           />

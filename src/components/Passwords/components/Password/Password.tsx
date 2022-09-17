@@ -11,7 +11,7 @@ interface PasswordProps extends TP {
 
 export const Password = ({ name, isVulnerable }: PasswordProps) => {
   return (
-    <ListItem className={classes.listItem} clickable>
+    <ListItem className={classes.listItem} isClickable={true}>
       {name}
       {isVulnerable && <Icon className="fas fa-exclamation-triangle" size="small" />}
     </ListItem>
