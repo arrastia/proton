@@ -1,11 +1,8 @@
-import { Button } from 'atoms/Button';
 import { Styles } from './Banner.styles';
 
-interface BannerProps {
-  message: string;
-  title: string;
-  url: string;
-}
+import { Button } from 'atoms/Button';
+
+import type { BannerProps } from './@types/Banner.types';
 
 export const Banner = ({ message, title, url }: BannerProps) => {
   const handleChangePasswordOnWebsite = () => (window.location.href = url);
@@ -14,7 +11,7 @@ export const Banner = ({ message, title, url }: BannerProps) => {
     <Styles.Banner>
       <h3>⚠️ {title}</h3>
       <p>{message}</p>
-      <Button appearance="secondary" onClick={handleChangePasswordOnWebsite}>
+      <Button appearance="default" onClick={handleChangePasswordOnWebsite}>
         Change password on website
       </Button>
     </Styles.Banner>
